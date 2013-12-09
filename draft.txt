@@ -1,0 +1,33 @@
+Author
+======
+Otto Sabart - Seberm
+www.seberm.com
+seberm[at]gmail[dot]com
+
+TODOS
+=====
+- Show actual mode in main panel (maybe in tray?)
+- Support VISUAL mode
+- How to run a program? which shortcut is the best?
+
+LINKS
+=====
+Awesome API: http://awesome.naquadah.org/doc/api/index.html
+Lua reference manual: http://www.lua.org/manual/5.1/manual.html
+
+
+NORMAL MODE
+j - change win down
+k - change win up
+h - change win left
+l - change win right
+dd - close current window
+f - change to fullscreen
+i - switch to INSERT mode
+ESC or ^[ (control + [) - switch to NORMAL mode
+m - maximize window
+n - minimize window (TODO - how to get window back)
+control + w - manage current window
+            - control + w - switch between two windows
+            - j or k or l or h - change to window in given direction
+u - open last closed window/application
