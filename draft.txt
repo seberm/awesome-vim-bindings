@@ -4,11 +4,13 @@ Otto Sabart - Seberm
 www.seberm.com
 seberm[at]gmail[dot]com
 
+
 TODOS
 =====
 - Show actual mode in main panel (maybe in tray?)
 - Support VISUAL mode
 - How to run a program? which shortcut is the best?
+
 
 LINKS
 =====

@@ -16,6 +16,7 @@ local NORMAL_MODE = "NORMAL"
 local INSERT_MODE = "INSERT"
 local actualMode = NORMAL_MODE
 
+-- Informative textbox showing actual mode
 modeBox = wibox.widget.textbox()
 
 function changeMode(mode)
@@ -29,17 +30,25 @@ function normalMode()
 
     keygrabber.run(function(mod, key, event)
         if event == "press" then 
-            if key == "x" then
-                awful.client.focus.byidx(-1)
+            local c = awful.client.next(0)
+
+            -- Switch to next window - same as 'l' for now
+            if key == "Tab" then
+                awful.client.focus.byidx(1)
                 if client.focus then client.focus:raise() end
             end
 
+            -- Change active window
             if key == "l" then
-                awful.client.focus.bydirection("right")
+                -- Switch to next window
+                awful.client.focus.byidx(1)
+                if client.focus then client.focus:raise() end
             end
 
             if key == "h" then
-                awful.client.focus.bydirection("left")
+                -- Switch to previous window
+                awful.client.focus.byidx(-1)
+                if client.focus then client.focus:raise() end
             end
 
             if key == "j" then
@@ -50,7 +59,25 @@ function normalMode()
                 awful.client.focus.bydirection("up")
             end
 
-            --or 'I' maybe?
+            -- Switch to fullscreen and back
+            if key == "f" then
+                c.fullscreen = not c.fullscreen
+            end
+
+            -- Switch between two windows
+            if key == "s" then
+                awful.client.focus.history.previous()
+                if client.focus then client.focus:raise() end
+            end
+
+            -- Maximize and back
+            if key == "m" then
+                c.maximized_horizontal = not c.maximized_horizontal
+                c.maximized_vertical   = not c.maximized_vertical
+            end
+
+            -- Change to insert mode
+            -- TODO Use 'I' key?
             if key == "i" then
                 changeMode(INSERT_MODE)
                 keygrabber.stop()
