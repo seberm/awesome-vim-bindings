@@ -24,7 +24,17 @@ Actions["j"] = moveDown
 Actions["k"] = moveUp
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
---Actions[nil] = function () print("function does not exist!") end
+function callAction(action)
+    for k in pairs(Actions) do
+        if (k == action) then
+            Actions[k]()
+            return
+        end
+    end
+
+    print("function does not exist!")
+end
+
 
 -- Constants
 local END = 0
@@ -34,6 +44,10 @@ local COMPLETE = 3
 
 local status = START;
 local cmdCount = 0;
+
+-- Buffer for cmds
+local cmd = ""
+
 
 function isNumber(key)
     if tonumber(key) then
@@ -64,9 +78,6 @@ function isLongCmd(key)
 end
 
 
--- Buffer for cmds
-cmd = ""
-
 
 function doAction(key)
     -- == while status do
@@ -80,10 +91,10 @@ function doAction(key)
                 return
             elseif isQuickCmd(key) then
                 if cmdCount == 0 then
-                    Actions[key]()
+                    callAction(key)
                 else
                     for i=1,cmdCount do
-                        Actions[key]()
+                        callAction(key)
                     end
                 end
 
@@ -93,7 +104,7 @@ function doAction(key)
                 cmd = ""
                 return
             elseif isLongCmd(key) then
-                cmd = cmd .. key
+                cmd = key
                 status = READ_NEXT
                 return
             else
@@ -106,17 +117,21 @@ function doAction(key)
 
 
         elseif status == READ_NEXT then
+            -- TODO If this format of command is given: Y-cmd-X-cmd, resultant count should be cmdCount = Y+X
             if isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
 
                 action = READ_NEXT
                 return
             elseif isLongCmd(key) then
+                cmd = cmd .. key
+                print("calling: " .. cmd)
+
                 if cmdCount == 0 then
-                    Actions[key]()
+                    callAction(cmd)
                 else
                     for i=1,cmdCount do
-                        Actions[key]()
+                        callAction(cmd)
                     end
                 end
                 
@@ -125,7 +140,7 @@ function doAction(key)
                 status = START
                 return
             else
-                print("combination not supported")
+                print("combination not supported OR Esc")
                 status = START
                 cmdCount = 0
                 cmd = ""
