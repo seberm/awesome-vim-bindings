@@ -2,32 +2,87 @@
 local P = {}
 VimAw = P
 
+local NORMAL_MODE = "NORMAL"
+local INSERT_MODE = "INSERT"
+local actualMode = NORMAL_MODE
+
+function P.changeMode(mode)
+    actualMode = mode
+    modeBox:set_text("[--" .. mode .. "--]")
+end
+
+
+
+-- Simple actions
+function goLeft()
+    awful.client.focus.byidx(-1)
+    if client.focus then client.focus:raise() end
+end
+
+
+function goDown() awful.client.focus.bydirection("down") end
+function goUp() awful.client.focus.bydirection("up") end
+
+function goRight()
+    awful.client.focus.byidx(1)
+    if client.focus then client.focus:raise() end
+end
+
+function runCommand()
+    mypromptbox[mouse.screen]:run()
+end
+
+function toogleFullscreen()
+    local c = awful.client.next(0)
+    c.fullscreen = not c.fullscreen
+end
+
+function toogleMaximalize()
+    local c = awful.client.next(0)
+    c.maximized_horizontal = not c.maximized_horizontal
+    c.maximized_vertical   = not c.maximized_vertical
+end
+
+function minimize()
+end
+
+function switchToInsertMode()
+    changeMode(INSERT_MODE)
+end
+
+function switchWindows()
+    awful.client.focus.history.previous()
+    if client.focus then client.focus:raise() end
+end
+
+
+--  Multi actions
 function closeWindow()
-    print("closing window")
+    local c = awful.client.next(0)
+    c:kill()
 end
-
-function goDown()
-    print("moving DOWN in wins")
-end
-
-function goUp()
-    print("moving UP in wins")
-end
-
 
 function closeWindowDown()
-    print("closing win down")
+    --print("closing win down")
 end
+
 
 
 -- Actions
-Actions = { }
+local Actions = { }
 
 -- Simple commands
 Actions["h"] = goLeft
 Actions["j"] = goDown
 Actions["k"] = goUp
 Actions["l"] = goRight
+Actions["r"] = runCommand
+Actions["f"] = toogleFullscreen
+Actions["m"] = toogleMaximalize
+Actions["n"] = minimize
+Actions["Tab"] = goLeft
+Actions["i"] = switchToInsertMode
+Actions["s"] = switchWindows
 
 -- Multi commands
 Actions["dd"] = closeWindow
