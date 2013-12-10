@@ -23,6 +23,9 @@ Actions["dd"] = closeWindow
 Actions["j"] = moveDown
 Actions["k"] = moveUp
 
+-- TODO write a function to call these functions in array - warn if key of an array does not exist
+--Actions[nil] = function () print("function does not exist!") end
+
 -- Constants
 local END = 0
 local START = 1
@@ -61,6 +64,10 @@ function isLongCmd(key)
 end
 
 
+-- Buffer for cmds
+cmd = ""
+
+
 function doAction(key)
     -- == while status do
     while status ~= END do
@@ -73,23 +80,27 @@ function doAction(key)
                 return
             elseif isQuickCmd(key) then
                 if cmdCount == 0 then
-                    print("quick: " .. key)
+                    Actions[key]()
                 else
-                    for i=1,cmdCount do print("quick: " .. key) end
+                    for i=1,cmdCount do
+                        Actions[key]()
+                    end
                 end
 
                 -- call function and reset
                 cmdCount = 0
                 status = START
+                cmd = ""
                 return
             elseif isLongCmd(key) then
-                print("long cmd: " .. key)
+                cmd = cmd .. key
                 status = READ_NEXT
                 return
             else
                 print("key not supported: " .. key)
                 status = START
                 cmdCount = 0
+                cmd = ""
                 return
             end
 
@@ -97,24 +108,27 @@ function doAction(key)
         elseif status == READ_NEXT then
             if isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
-                print("number: " .. key .. "cmdCount: " .. cmdCount)
+
                 action = READ_NEXT
                 return
             elseif isLongCmd(key) then
-                --or isQuickCmd(key)
                 if cmdCount == 0 then
-                    print("LONG CMD: pop from stack and call function: " .. key)
+                    Actions[key]()
                 else
-                    for i=1,cmdCount do print("LONG CMD: pop from stack and call function: " .. key) end
+                    for i=1,cmdCount do
+                        Actions[key]()
+                    end
                 end
                 
                 cmdCount = 0
+                cmd = ""
                 status = START
                 return
             else
                 print("combination not supported")
                 status = START
                 cmdCount = 0
+                cmd = ""
                 return
             end
         end
