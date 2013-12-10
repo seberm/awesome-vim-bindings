@@ -5,21 +5,19 @@ Control your Awesome desktop with Vim shortcuts!
 NORMAL MODE
 -----------
 
-Simple commands
+### Simple commands:
+    j - go to win down
+    k - go to win up
+    h - go to win on the left
+    l - go to win on the right
+    f - change to fullscreen
+    i - switch to INSERT mode
+    m - maximize window
+    n - minimize window (TODO - how to get window back)
 
-* j - go to win down
-* k - go to win up
-* h - go to win on the left
-* l - go to win on the right
-* f - change to fullscreen
-* i - switch to INSERT mode
-* m - maximize window
-* n - minimize window (TODO - how to get window back)
 
-
-Multi commands
-
-dd - close current window
+### Multi commands:
+    dd - close current window
 
 
 Author
@@ -31,9 +29,8 @@ Author
 
 LINKS
 -----
-Awesome API: http://awesome.naquadah.org/doc/api/index.html
-
-Lua reference manual: http://www.lua.org/manual/5.1/manual.html
+* [Awesome API](http://awesome.naquadah.org/doc/api/index.html)
+* [Lua reference manual](http://www.lua.org/manual/5.1/manual.html)
 
 
 TODOS
