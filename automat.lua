@@ -1,8 +1,6 @@
---void onPressKey(char key, int event)  {
---    if (event == EVENT_PRESS) {
---        doAction(key);
---    }
---}
+-- Namespace
+local P = {}
+VimAw = P
 
 function closeWindow()
     print("closing window")
@@ -35,8 +33,9 @@ Actions["l"] = goRight
 Actions["dd"] = closeWindow
 Actions["dj"] = closeWindowDown
 
+
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
-function callAction(action, n)
+local function callAction(action, n)
     -- Function never will be called 0 times
     if n == nil or n == 0 then n = 1 end
 
@@ -47,7 +46,7 @@ function callAction(action, n)
         end
     end
 
-    print("function does not exist!")
+    print("Function does not exist!")
 end
 
 
@@ -73,7 +72,7 @@ function isNumber(key)
 end
 
 
-function inTable(table, item)
+local function inTable(table, item)
     for key, value in pairs(table) do
         if value == item then return key end
     end
@@ -83,17 +82,17 @@ end
 
 
 local QUICK_CMDS = { "j", "k", "l", "h", "m" }
-function isQuickCmd(key)
+local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
 
-local LONG_CMDS = { "d" }
-function isLongCmd(key)
+local LONG_CMDS = { "d", "g" }
+local function isLongCmd(key)
     return inTable(LONG_CMDS, key)
 end
 
 
-function reset()
+local function reset()
     status = START
     cmdCount = 0
     cmd = ""
@@ -101,7 +100,7 @@ end
 
 
 
-function doAction(key)
+function P.doAction(key)
     -- == while status do
     while status ~= END do
         -- READY STATUS - reading the first char
@@ -141,8 +140,6 @@ function doAction(key)
         end
     end
 end
-
-
 
 
 
