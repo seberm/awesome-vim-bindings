@@ -469,6 +469,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     --awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
     awful.key({ modkey,           }, "Escape", function () normalMode() end),
+    awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
 
     awful.key({ modkey,           }, "j",
         function ()
