@@ -86,6 +86,11 @@ function switchWindows()
     if client.focus then client.focus:raise() end
 end
 
+function runTerminal()
+    awful.util.spawn(terminal)
+    -- TODO switch directly to insert mode?
+end
+
 
 --  Multi actions
 function closeWindow()
@@ -114,6 +119,7 @@ Actions["n"] = minimize
 Actions["Tab"] = goNext
 Actions["i"] = switchToInsertMode
 Actions["s"] = switchWindows
+Actions["t"] = runTerminal
 
 -- Multi commands
 Actions["dd"] = closeWindow
@@ -167,7 +173,7 @@ local function inTable(table, item)
 end
 
 
-local QUICK_CMDS = { "h", "j", "k", "l", "r", "f", "m", "n", "Tab", "i", "s" }
+local QUICK_CMDS = { "h", "j", "k", "l", "r", "f", "m", "n", "Tab", "i", "s", "t" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
@@ -275,6 +281,16 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+
+
+
+-------------------------------------
+-- Highlighted active window (this will not be in future here)
+beautiful.border_width = "3"
+--red
+beautiful.border_focus = "#ff0d11"
+-------------------------------------
+
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"

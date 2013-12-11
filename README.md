@@ -14,6 +14,7 @@ NORMAL MODE
     i - switch to INSERT mode
     m - maximize window
     n - minimize window (TODO - how to get window back)
+    t - run terminal
 
 
 ### Multi commands:
