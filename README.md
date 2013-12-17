@@ -19,6 +19,8 @@ NORMAL MODE
 
 ### Multi commands:
     dd - close current window
+    cl - change to next layout
+    Cl - change to previous layout
 
 
 Author

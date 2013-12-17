@@ -11,14 +11,31 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-
+---------------------------
+-- Table of layouts to cover with awful.layout.inc, order matters.
+local layouts =
+{
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier
+}
+-- }}}
+---------------------------
 
 
 
 -- Namespace
 --local P = {}
 --VimAw = P
-
 
 
 
@@ -116,6 +133,13 @@ function closeWindowDown()
     --print("closing win down")
 end
 
+function nextLayout()
+    awful.layout.inc(layouts,  1)
+end
+
+function previousLayout()
+    awful.layout.inc(layouts,  -1)
+end
 
 
 -- Actions
@@ -138,6 +162,8 @@ Actions["t"] = runTerminal
 -- Multi commands
 Actions["dd"] = closeWindow
 Actions["dj"] = closeWindowDown
+Actions["cl"] = nextLayout
+Actions["Cl"] = previousLayout
 
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
@@ -192,7 +218,7 @@ local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
 
-local LONG_CMDS = { "d", "g" }
+local LONG_CMDS = { "d", "g", "c", "C" }
 local function isLongCmd(key)
     return inTable(LONG_CMDS, key)
 end
@@ -318,23 +344,6 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
-{
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
-}
--- }}}
 
 -- {{{ Wallpaper
 if beautiful.wallpaper then
@@ -349,7 +358,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -526,9 +535,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
