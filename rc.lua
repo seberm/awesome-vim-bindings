@@ -199,6 +199,10 @@ Actions["Tab"] = goNext
 Actions["i"] = switchToInsertMode
 Actions["s"] = switchWindows
 Actions["t"] = runTerminal
+Actions["Right"] = goRight
+Actions["Left"] = goLeft
+Actions["Up"] = goUp
+Actions["Down"] = goDown
 
 -- Multi commands
 Actions["dd"] = closeWindow
@@ -258,7 +262,7 @@ local function inTable(table, item)
 end
 
 
-local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "Left", "Right", "Down", "Up" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
