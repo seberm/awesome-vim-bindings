@@ -18,7 +18,9 @@ NORMAL MODE
     j - go to win down
     k - go to win up
     h - go to win on the left
+    H - go to previous window
     l - go to win on the right
+    L - go to next widnow (same as Tab for now)
     f - change to fullscreen
     i - switch to INSERT mode
     m - maximize window

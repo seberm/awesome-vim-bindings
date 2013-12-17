@@ -56,18 +56,30 @@ end
 -- Simple actions
 function goLeft()
     awful.client.focus.bydirection("left")
-    --awful.client.focus.byidx(-1)
-    --if client.focus then client.focus:raise() end
+    if client.focus then
+        client.focus:raise()
+    end
 end
 
+function goDown()
+    awful.client.focus.bydirection("down")
+    if client.focus then
+        client.focus:raise()
+    end
+end
 
-function goDown() awful.client.focus.bydirection("down") end
-function goUp() awful.client.focus.bydirection("up") end
+function goUp()
+    awful.client.focus.bydirection("up")
+    if client.focus then
+        client.focus:raise()
+    end
+end
 
 function goRight()
     awful.client.focus.bydirection("right")
-    --awful.client.focus.byidx(1)
-    --if client.focus then client.focus:raise() end
+    if client.focus then
+        client.focus:raise()
+    end
 end
 
 function runCommand()
@@ -100,8 +112,17 @@ function minimize()
     c.minimized = true
 end
 
+function restore()
+    awful.client.restore()
+end
+
 function goNext()
     awful.client.focus.byidx(1)
+    if client.focus then client.focus:raise() end
+end
+
+function goPrevious()
+    awful.client.focus.byidx(-1)
     if client.focus then client.focus:raise() end
 end
 
@@ -164,13 +185,16 @@ local Actions = { }
 
 -- Simple commands
 Actions["h"] = goLeft
+Actions["H"] = goPrevious
 Actions["j"] = goDown
 Actions["k"] = goUp
 Actions["l"] = goRight
+Actions["L"] = goNext
 Actions["r"] = runCommand
 Actions["f"] = toogleFullscreen
 Actions["m"] = toogleMaximalize
 Actions["n"] = minimize
+Actions["N"] = restore
 Actions["Tab"] = goNext
 Actions["i"] = switchToInsertMode
 Actions["s"] = switchWindows
@@ -234,7 +258,7 @@ local function inTable(table, item)
 end
 
 
-local QUICK_CMDS = { "h", "j", "k", "l", "r", "f", "m", "n", "Tab", "i", "s", "t" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
@@ -551,7 +575,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
    
     -- Menubar
