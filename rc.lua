@@ -71,6 +71,7 @@ function goRight()
 end
 
 function runCommand()
+    -- TODO Multiple run does not work (for example: 4r)
     mypromptbox[mouse.screen]:run()
 end
 
@@ -149,6 +150,15 @@ function previousTag()
     awful.tag.viewprev()
 end
 
+function nextScreen()
+    awful.screen.focus_relative( 1)
+end
+
+function previousScreen()
+    awful.screen.focus_relative(-1)
+end
+
+
 -- Actions
 local Actions = { }
 
@@ -173,6 +183,8 @@ Actions["cl"] = nextLayout
 Actions["Cl"] = previousLayout
 Actions["ct"] = nextTag
 Actions["Ct"] = previousTag
+Actions["cs"] = nextScreen
+Actions["Cs"] = previousScreen
 
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
@@ -518,8 +530,7 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -542,16 +553,7 @@ globalkeys = awful.util.table.join(
     
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
-    -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+   
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 )

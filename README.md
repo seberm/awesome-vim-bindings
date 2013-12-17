@@ -23,6 +23,8 @@ NORMAL MODE
     Cl - change to previous layout
     ct - change to next tag
     Ct - change to previous tag
+    cs - change to next screen
+    Cs - change to previous screen
 
 
 Author
