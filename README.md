@@ -21,6 +21,8 @@ NORMAL MODE
     dd - close current window
     cl - change to next layout
     Cl - change to previous layout
+    ct - change to next tag
+    Ct - change to previous tag
 
 
 Author

@@ -141,6 +141,13 @@ function previousLayout()
     awful.layout.inc(layouts,  -1)
 end
 
+function nextTag()
+    awful.tag.viewnext()
+end
+
+function previousTag()
+    awful.tag.viewprev()
+end
 
 -- Actions
 local Actions = { }
@@ -164,6 +171,8 @@ Actions["dd"] = closeWindow
 Actions["dj"] = closeWindowDown
 Actions["cl"] = nextLayout
 Actions["Cl"] = previousLayout
+Actions["ct"] = nextTag
+Actions["Ct"] = previousTag
 
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
@@ -224,6 +233,7 @@ local function isLongCmd(key)
 end
 
 
+-- Resets automat state
 local function reset()
     status = START
     cmdCount = 0
@@ -239,7 +249,6 @@ function doAction(key)
         if status == START then
             if isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
-                --action = START
                 return
             elseif isQuickCmd(key) then
                 cmd = key
@@ -265,7 +274,6 @@ function doAction(key)
             end
 
         elseif status == COMPLETE then
-            print("calling: " .. cmd)
             callAction(cmd, cmdCount)
             reset()
             break; -- or return
@@ -494,9 +502,6 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
 
 
-
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
 
     awful.key({ modkey,           }, "j",
         function ()
