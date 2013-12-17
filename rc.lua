@@ -55,28 +55,60 @@ end
 
 -- Simple actions
 function goLeft()
+    local c = awful.client.next(0)
+    if c == nil then
+        return
+    end
     awful.client.focus.bydirection("left")
+    if c == awful.client.next(0) then
+        awful.client.focus.byidx(-1)
+    end
+
     if client.focus then
         client.focus:raise()
     end
 end
 
 function goDown()
+    local c = awful.client.next(0)
+    if c == nil then
+        return
+    end
     awful.client.focus.bydirection("down")
+    if c == awful.client.next(0) then
+        awful.client.focus.byidx(1)
+    end
+
     if client.focus then
         client.focus:raise()
     end
 end
 
 function goUp()
+    local c = awful.client.next(0)
+    if c == nil then
+        return
+    end
     awful.client.focus.bydirection("up")
+    if c == awful.client.next(0) then
+        awful.client.focus.byidx(-1)
+    end
+
     if client.focus then
         client.focus:raise()
     end
 end
 
 function goRight()
+    local c = awful.client.next(0)
+    if c == nil then
+        return
+    end
     awful.client.focus.bydirection("right")
+    if c == awful.client.next(0) then
+        awful.client.focus.byidx(1)
+    end
+
     if client.focus then
         client.focus:raise()
     end
@@ -84,6 +116,7 @@ end
 
 function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
+    -- TODO Application is automaticaly switched into INSERT MODE
     mypromptbox[mouse.screen]:run()
 end
 
