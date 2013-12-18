@@ -139,7 +139,7 @@ end
 
 function runTerminal()
     awful.util.spawn(terminal)
-    -- TODO switch directly to insert mode?
+    switchToInsertMode()
 end
 
 
