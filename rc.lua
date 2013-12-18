@@ -31,21 +31,35 @@ local layouts =
 -- }}}
 ---------------------------
 
-
-
--- Namespace
---local P = {}
---VimAw = P
-
-
-
+-- Modes definition
 local NORMAL_MODE = "NORMAL"
 local INSERT_MODE = "INSERT"
-local actualMode = NORMAL_MODE
 
+local actualMode = NORMAL_MODE
 
 -- Informative textbox showing actual mode
 local modeBox = wibox.widget.textbox()
+
+
+-- Utilities
+function isNumber(key)
+    if tonumber(key) then
+        return true
+    end
+
+    return false
+end
+
+
+local function inTable(table, item)
+    for key, value in pairs(table) do
+        if value == item then return key end
+    end
+
+    return false
+end
+--------------------------
+
 
 function changeMode(mode)
     actualMode = mode
@@ -84,7 +98,7 @@ end
 
 function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
-    -- TODO Application is automaticaly switched into INSERT MODE
+    -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...
     mypromptbox[mouse.screen]:run()
 end
 
@@ -245,24 +259,6 @@ local cmdCount = 0;
 local cmd = ""
 
 
-function isNumber(key)
-    if tonumber(key) then
-        return true
-    end
-
-    return false
-end
-
-
-local function inTable(table, item)
-    for key, value in pairs(table) do
-        if value == item then return key end
-    end
-
-    return false
-end
-
-
 local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "Left", "Right", "Down", "Up" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
@@ -273,7 +269,6 @@ local function isLongCmd(key)
     return inTable(LONG_CMDS, key)
 end
 
-
 -- Resets automat state
 local function reset()
     status = START
@@ -281,8 +276,7 @@ local function reset()
     cmd = ""
 end
 
-
-
+-- Automat
 function doAction(key)
     -- == while status do
     while status ~= END do
@@ -323,6 +317,7 @@ function doAction(key)
 end
 
 
+-- Switch to NORMAL mode
 function normalMode()
     changeMode(NORMAL_MODE)
 
