@@ -117,6 +117,7 @@ function toogleMaximalize()
     end
     c.maximized_horizontal = not c.maximized_horizontal
     c.maximized_vertical   = not c.maximized_vertical
+    if c.focus then c.focus:raise() end
 end
 
 function minimize()
