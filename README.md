@@ -9,7 +9,7 @@ For now VimAw is only a prototype.
 Installation
 ------------
 1. Clone the repository and replace your `~/.config/awesome/rc.lua` file with `rc.lua` from the repo.
-2. Restart awesome (Mod + Control + r)
+2. Restart Awesome with `Mod + Control + r`
 
 
 NORMAL MODE
@@ -20,7 +20,7 @@ NORMAL MODE
     h - go to win on the left
     H - go to previous window
     l - go to win on the right
-    L - go to next widnow (same as Tab for now)
+    L - go to next widnow (same as Tab)
     f - change to fullscreen
     i - switch to INSERT mode
     m - maximize window
@@ -40,14 +40,22 @@ NORMAL MODE
 
 TESTING
 -------
-[Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
+* [Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
 
     Xephyr :1 -ac -br -noreset -screen 1152x720 & DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua.test
-
 
     $ awmtt start --config=~/.config/awesome/rc.lua.new
     $ awmtt stop
     $ awmtt restart
+
+
+WANT CONTRIBUTE?
+----------------
+VimAw is only something like protoype and there is a lot of work. Some of the TODOs you can find at the end of this document or directly in rc.lua file. 
+
+What is the most important thing at the moment is to create list of shortcuts and their actions. Test them and optimize the list. After it will be necessary some code beautification and clarification.
+
+Favoured method of contribution is via pull requests. E-mail patches are accepted too (seberm[at]gmail[dot]com).
 
 
 Author
@@ -64,13 +72,12 @@ LINKS
 * [Awesome on ArchWiki] (https://wiki.archlinux.org/index.php/awesome)
 
 
+
 TODOS
 -----
-* Support VISUAL mode
-* Which shortcut is the best for returning from insert mode? (MOD1 + ESC | CTRL + MOD1 + [)
-
-* 'u' - open last closed window/application
-
-* control + w - manage current window
+    - Support VISUAL mode
+    - Which shortcut is the best for returning from insert mode? (MOD1 + ESC | CTRL + MOD1 + [)
+    - 'u' - open last closed window/application
+    - Control + w - manage current window
             - control + w - switch between two windows
             - j or k or l or h - change to window in given direction
