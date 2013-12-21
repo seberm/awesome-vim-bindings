@@ -38,6 +38,18 @@ NORMAL MODE
     Cs - change to previous screen
 
 
+TESTING
+-------
+[Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
+
+    Xephyr :1 -ac -br -noreset -screen 1152x720 & DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua.test
+
+
+    $ awmtt start --config=~/.config/awesome/rc.lua.new
+    $ awmtt stop
+    $ awmtt restart
+
+
 Author
 ------
 * Otto Sabart - Seberm
