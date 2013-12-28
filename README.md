@@ -46,6 +46,7 @@ Mod4 + Esc or Control + Mod1 + ] - switch to NORMAL mode
 TESTING
 -------
 * [Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
+
 ```
 Xephyr :1 -ac -br -noreset -screen 1152x720 & DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua.test
 
