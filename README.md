@@ -15,38 +15,44 @@ Installation
 NORMAL MODE
 -----------
 ### Simple commands:
-    j - go to win down
-    k - go to win up
-    h - go to win on the left
-    H - go to previous window
-    l - go to win on the right
-    L - go to next widnow (same as Tab)
-    f - change to fullscreen
-    i - switch to INSERT mode
-    m - maximize window
-    n - minimize window (TODO - restoring window)
-    t - run terminal
+```
+j - go to win down
+k - go to win up
+h - go to win on the left
+H - go to previous window
+l - go to win on the right
+L - go to next widnow (same as Tab)
+f - change to fullscreen
+i - switch to INSERT mode
+m - maximize window
+n - minimize window (TODO - restoring window)
+t - run terminal
+```
 
 
 ### Multi commands:
-    dd - close current window
-    cl - change to next layout
-    Cl - change to previous layout
-    ct - change to next tag
-    Ct - change to previous tag
-    cs - change to next screen
-    Cs - change to previous screen
+```
+dd - close current window
+cl - change to next layout
+Cl - change to previous layout
+ct - change to next tag
+Ct - change to previous tag
+cs - change to next screen
+Cs - change to previous screen
+Mod4 + Esc or Control + Mod1 + ] - switch to NORMAL mode
+```
 
 
 TESTING
 -------
 * [Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
+```
+Xephyr :1 -ac -br -noreset -screen 1152x720 & DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua.test
 
-    Xephyr :1 -ac -br -noreset -screen 1152x720 & DISPLAY=:1.0 awesome -c ~/.config/awesome/rc.lua.test
-
-    $ awmtt start --config=~/.config/awesome/rc.lua.new
-    $ awmtt stop
-    $ awmtt restart
+$ awmtt start --config=~/.config/awesome/rc.lua.new
+$ awmtt stop
+$ awmtt restart
+```
 
 
 WANT CONTRIBUTE?
@@ -75,9 +81,11 @@ LINKS
 
 TODOS
 -----
-    - Support VISUAL mode
-    - Which shortcut is the best for returning from insert mode? (MOD1 + ESC | CTRL + MOD1 + [)
-    - 'u' - open last closed window/application
-    - Control + w - manage current window
-            - control + w - switch between two windows
-            - j or k or l or h - change to window in given direction
+```
+- Support VISUAL mode
+- Which shortcut is the best for returning from insert mode? (MOD4 + ESC | CTRL + MOD1 + [)
+- 'u' - open last closed window/application
+- Control + w - manage current window
+        - control + w - switch between two windows
+        - j or k or l or h - change to window in given direction
+```
