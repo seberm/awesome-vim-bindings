@@ -27,6 +27,7 @@ i - switch to INSERT mode
 m - maximize window
 n - minimize window (TODO - restoring window)
 t - run terminal
+e - run editor
 ```
 
 

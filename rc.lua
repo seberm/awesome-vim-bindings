@@ -11,6 +11,12 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+-- This is used later as the default terminal and editor to run.
+terminal = "konsole"
+editor = os.getenv("EDITOR") or "vi"
+editor_cmd = terminal .. " -e " .. editor
+
+
 ---------------------------
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -70,30 +76,22 @@ end
 -- Simple actions
 function goLeft()
     awful.client.focus.bydirection("left")
-    if client.focus then
-        client.focus:raise()
-    end
+    if client.focus then client.focus:raise() end
 end
 
 function goDown()
     awful.client.focus.bydirection("down")
-    if client.focus then
-        client.focus:raise()
-    end
+    if client.focus then client.focus:raise() end
 end
 
 function goUp()
     awful.client.focus.bydirection("up")
-    if client.focus then
-        client.focus:raise()
-    end
+    if client.focus then client.focus:raise() end
 end
 
 function goRight()
     awful.client.focus.bydirection("right")
-    if client.focus then
-        client.focus:raise()
-    end
+    if client.focus then client.focus:raise() end
 end
 
 function runCommand()
@@ -104,27 +102,25 @@ end
 
 function toogleFullscreen()
     local c = awful.client.next(0)
-    if c == nil then
-        return
-    end
+    if c == nil then return end
+
     c.fullscreen = not c.fullscreen
 end
 
 function toogleMaximalize()
     local c = awful.client.next(0)
-    if c == nil then
-        return
-    end
+    if c == nil then return end
+
     c.maximized_horizontal = not c.maximized_horizontal
     c.maximized_vertical   = not c.maximized_vertical
+
     if c.focus then c.focus:raise() end
 end
 
 function minimize()
     local c = awful.client.next(0)
-    if c == nil then
-        return
-    end
+    if c == nil then return end
+
     c.minimized = true
 end
 
@@ -157,13 +153,16 @@ function runTerminal()
     switchToInsertMode()
 end
 
+function runEditor()
+    awful.util.spawn(editor_cmd)
+    switchToInsertMode()
+end
 
 --  Multi actions
 function closeWindow()
     local c = awful.client.next(0)
-    if c == nil then
-        return
-    end
+    if c == nil then return end
+
     c:kill()
 end
 
@@ -215,6 +214,7 @@ Actions["Tab"] = goNext
 Actions["i"] = switchToInsertMode
 Actions["s"] = switchWindows
 Actions["t"] = runTerminal
+Actions["e"] = runEditor
 Actions["Right"] = goRight
 Actions["Left"] = goLeft
 Actions["Up"] = goUp
@@ -260,7 +260,7 @@ local cmdCount = 0;
 local cmd = ""
 
 
-local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "Left", "Right", "Down", "Up" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
@@ -323,18 +323,13 @@ function normalMode()
     changeMode(NORMAL_MODE)
 
     keygrabber.run(function(mod, key, event)
-        if event == "press" then 
-            doAction(key)
-        end
+        if event == "press" then doAction(key) end
     end)
 end
 
 
-
 -- START WITH NORMAL MODE
 normalMode()
-
-
 
 
 
@@ -377,10 +372,6 @@ beautiful.border_focus = "#ff0d11"
 -------------------------------------
 
 
--- This is used later as the default terminal and editor to run.
-terminal = "konsole"
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
