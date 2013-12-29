@@ -8,7 +8,7 @@ For now VimAw is only a prototype.
 
 Installation
 ------------
-1. Clone the repository and replace your `~/.config/awesome/rc.lua` file with `rc.lua` from the repo.
+1. Clone the repository and replace your `~/.config/awesome/rc.lua` file with `rc.lua` from the repo
 2. Restart Awesome with `Mod + Control + r`
 
 
@@ -43,6 +43,16 @@ Cs - change to previous screen
 Mod4 + Esc or Control + Mod1 + ] - switch to NORMAL mode
 ```
 
+COMMAND MODE
+------------
+If you want to run an Awesome command just press ':' in NORMAL mode. Now you can type your command.
+
+Supported commands are:
+```
+restart - restart awesome
+quit    - quit awesome
+```
+
 
 TESTING
 -------
@@ -59,7 +69,7 @@ $ awmtt restart
 
 WANT CONTRIBUTE?
 ----------------
-VimAw is only something like protoype and there is a lot of work. Some of the TODOs you can find at the end of this document or directly in rc.lua file. 
+VimAw is only something like protoype and there is a lot of work. Some of the TODOs you can find at the end of this document or directly in `rc.lua` file. 
 
 What is the most important thing at the moment is to create list of shortcuts and their actions. Test them and optimize the list. After it will be necessary some code beautification and clarification.
 

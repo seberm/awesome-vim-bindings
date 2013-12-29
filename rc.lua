@@ -158,6 +158,38 @@ function runEditor()
     switchToInsertMode()
 end
 
+
+-- Commands specification
+local Commands = { }
+Commands["restart"] = awesome.restart
+Commands["quit"] = awesome.quit
+
+
+function switchToCommandMode()
+    local promptbox = mypromptbox[mouse.screen]
+
+    awful.prompt.run(
+      { prompt = "<span>COMMAND MODE: </span>" },
+      promptbox.widget,
+      function (command)
+        local cmd = Commands[command];
+
+        -- TODO Parse command params and add them as argument
+        local arg = nil
+
+        if cmd then cmd(arg) end
+
+        -- Prompt automatically switches desktop into INSERT mode, so... we must
+        -- explicitly switch it back into NORMAL mode
+        normalMode()
+      end,
+
+      -- TODO Command completion and history
+      awful.completion.shell,
+      awful.util.getdir("cache") .. "/history")
+end
+
+
 --  Multi actions
 function closeWindow(direction)
     if direction then
@@ -204,6 +236,7 @@ Actions["Right"] = goRight
 Actions["Left"] = goLeft
 Actions["Up"] = goUp
 Actions["Down"] = goDown
+Actions[":"] = switchToCommandMode
 
 -- Multi commands
 Actions["dd"] = closeWindow
@@ -248,7 +281,7 @@ local cmdCount = 0;
 local cmd = ""
 
 
-local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
@@ -526,9 +559,6 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
 
-    -- Standard program
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
