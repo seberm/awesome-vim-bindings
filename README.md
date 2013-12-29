@@ -99,5 +99,4 @@ TODOS
 - 'u' - open last closed window/application
 - Control + w - manage current window
         - control + w - switch between two windows
-        - j or k or l or h - change to window in given direction
 ```
