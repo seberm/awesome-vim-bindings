@@ -168,45 +168,16 @@ function closeWindow(direction)
     if c then c:kill() end
 end
 
-function closeWindowDown()
-    closeWindow("down")
-end
-
-function closeWindowUp()
-    closeWindow("up")
-end
-
-function closeWindowLeft()
-    closeWindow("left")
-end
-
-function closeWindowRight()
-    closeWindow("right")
-end
-
-function nextLayout()
-    awful.layout.inc(layouts,  1)
-end
-
-function previousLayout()
-    awful.layout.inc(layouts,  -1)
-end
-
-function nextTag()
-    awful.tag.viewnext()
-end
-
-function previousTag()
-    awful.tag.viewprev()
-end
-
-function nextScreen()
-    awful.screen.focus_relative( 1)
-end
-
-function previousScreen()
-    awful.screen.focus_relative(-1)
-end
+function closeWindowDown() closeWindow("down") end
+function closeWindowUp() closeWindow("up") end
+function closeWindowLeft() closeWindow("left") end
+function closeWindowRight() closeWindow("right") end
+function nextLayout() awful.layout.inc(layouts, 1) end
+function previousLayout() awful.layout.inc(layouts, -1) end
+function nextTag() awful.tag.viewnext() end
+function previousTag() awful.tag.viewprev() end
+function nextScreen() awful.screen.focus_relative(1) end
+function previousScreen() awful.screen.focus_relative(-1) end
 
 
 -- Actions
@@ -547,17 +518,6 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
 
 
-
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
@@ -565,13 +525,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
 
     -- Standard program
     awful.key({ modkey, "Control" }, "r", awesome.restart),
