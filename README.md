@@ -62,14 +62,14 @@ VimAw is only something like protoype and there is a lot of work. Some of the TO
 
 What is the most important thing at the moment is to create list of shortcuts and their actions. Test them and optimize the list. After it will be necessary some code beautification and clarification.
 
-Favoured method of contribution is via pull requests. E-mail patches are accepted too (seberm[at]gmail[dot]com).
+Favoured method of contribution is via pull requests. E-mail patches are accepted too (seberm[at]seberm[dot]com).
 
 
 Author
 ------
 * Otto Sabart - Seberm
 * www.seberm.com
-* seberm[at]gmail[dot]com
+* seberm[at]seberm[dot]com
 
 
 LINKS
