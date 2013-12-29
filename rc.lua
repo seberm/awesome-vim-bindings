@@ -161,13 +161,16 @@ end
 --  Multi actions
 function closeWindow()
     local c = awful.client.next(0)
-    if c == nil then return end
-
-    c:kill()
+    if c then c:kill() end
 end
 
 function closeWindowDown()
-    --print("closing win down")
+    awful.client.focus.bydirection("down")
+
+    if client.focus then
+        local c = awful.client.next(0)
+        c:kill()
+    end
 end
 
 function nextLayout()
