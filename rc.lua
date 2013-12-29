@@ -166,11 +166,9 @@ Commands["quit"] = awesome.quit
 
 
 function switchToCommandMode()
-    local promptbox = mypromptbox[mouse.screen]
-
     awful.prompt.run(
       { prompt = "<span>COMMAND MODE: </span>" },
-      promptbox.widget,
+      mypromptbox[mouse.screen].widget,
       function (command)
         local cmd = Commands[command];
 
@@ -185,8 +183,9 @@ function switchToCommandMode()
       end,
 
       -- TODO Command completion and history
-      awful.completion.shell,
-      awful.util.getdir("cache") .. "/history")
+      --awful.completion.shell,
+      nil,
+      awful.util.getdir("cache") .. "/history_command_mode")
 end
 
 
@@ -198,6 +197,9 @@ function closeWindow(direction)
 
     local c = awful.client.next(0)
     if c then c:kill() end
+
+    -- Switch to next window
+    goNext()
 end
 
 function closeWindowDown() closeWindow("down") end
@@ -291,7 +293,7 @@ local function isLongCmd(key)
     return inTable(LONG_CMDS, key)
 end
 
--- Resets automat state
+-- Reset automat state
 local function reset()
     status = START
     cmdCount = 0
