@@ -159,18 +159,29 @@ function runEditor()
 end
 
 --  Multi actions
-function closeWindow()
+function closeWindow(direction)
+    if direction then
+        awful.client.focus.bydirection(direction)
+    end
+
     local c = awful.client.next(0)
     if c then c:kill() end
 end
 
 function closeWindowDown()
-    awful.client.focus.bydirection("down")
+    closeWindow("down")
+end
 
-    if client.focus then
-        local c = awful.client.next(0)
-        c:kill()
-    end
+function closeWindowUp()
+    closeWindow("up")
+end
+
+function closeWindowLeft()
+    closeWindow("left")
+end
+
+function closeWindowRight()
+    closeWindow("right")
 end
 
 function nextLayout()
@@ -226,6 +237,9 @@ Actions["Down"] = goDown
 -- Multi commands
 Actions["dd"] = closeWindow
 Actions["dj"] = closeWindowDown
+Actions["dk"] = closeWindowUp
+Actions["dh"] = closeWindowLeft
+Actions["dl"] = closeWindowRight
 Actions["cl"] = nextLayout
 Actions["Cl"] = previousLayout
 Actions["ct"] = nextTag
