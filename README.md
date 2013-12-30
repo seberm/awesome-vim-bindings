@@ -16,16 +16,18 @@ NORMAL MODE
 -----------
 ### Simple commands:
 ```
-j - go to win down
-k - go to win up
 h - go to win on the left
 H - go to previous window
+j - go to win down
+k - go to win up
 l - go to win on the right
 L - go to next widnow (same as Tab)
+r - run a program
 f - change to fullscreen
-i - switch to INSERT mode
 m - maximize window
 n - minimize window (TODO - restoring window)
+i - switch to INSERT mode
+s - switch windows
 t - run terminal
 e - run editor
 ```
@@ -34,6 +36,10 @@ e - run editor
 ### Multi commands:
 ```
 dd - close current window
+dj - close window down
+dk - close window up
+dh - close window left
+dl - close window right
 cl - change to next layout
 Cl - change to previous layout
 ct - change to next tag
@@ -51,6 +57,7 @@ Supported commands are:
 ```
 restart - restart awesome
 quit    - quit awesome
+!<cmd>  - run a program (same as 'r' command)
 ```
 
 

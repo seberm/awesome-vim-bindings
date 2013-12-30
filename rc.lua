@@ -96,6 +96,7 @@ end
 
 function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
+    -- TODO When command input is canceled, desktop should stay in NORMAL mode
     -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...
     mypromptbox[mouse.screen]:run()
 end
@@ -170,12 +171,21 @@ function switchToCommandMode()
       { prompt = "<span>COMMAND MODE: </span>" },
       mypromptbox[mouse.screen].widget,
       function (command)
-        local cmd = Commands[command];
+        local returnString = nil
+        local normalProg, command, arg = command:match("^%s*(!?)%s*(%a+)(.*)")
 
-        -- TODO Parse command params and add them as argument
-        local arg = nil
+        if normalProg ~= "" then
+            returnString = awful.util.spawn(command .. " " .. arg)
+        else -- It's an awesome command
+            local cmd = Commands[command];
+            if cmd then
+                cmd(arg)
+            else
+                returnString = "VimAw does not support command \"" .. command .. "\""
+            end
+        end
 
-        if cmd then cmd(arg) end
+        if type(returnString) == "string" then mypromptbox[mouse.screen].widget:set_text(returnString) end
 
         -- Prompt automatically switches desktop into INSERT mode, so... we must
         -- explicitly switch it back into NORMAL mode
