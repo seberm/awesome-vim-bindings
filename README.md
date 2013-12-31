@@ -23,8 +23,8 @@ k - go to win up
 l - go to win on the right
 L - go to next widnow (same as Tab)
 r - run a program
-f - change to fullscreen
-m - maximize window
+f - change to fullscreen - DEPRECATED
+m - maximize window - DEPRECATED - will be used for saving client into register (see TODOS)
 n - minimize window (TODO - restoring window)
 i - switch to INSERT mode
 s - switch windows
@@ -47,6 +47,9 @@ ct - change to next tag
 Ct - change to previous tag
 cs - change to next screen
 Cs - change to previous screen
+gm - toogle maximize window
+gf - toogle fullscreen
+gt - toogle window on top
 Mod4 + Esc or Control + Mod1 + ] - switch to NORMAL mode
 ```
 
@@ -107,4 +110,6 @@ TODOS
 - 'u' - open last closed window/application
 - Control + w - manage current window
         - control + w - switch between two windows
+- Window maximize with 'gUU' or with 'gm'?
+- Use 'm' for maximize or for remembering some client? - example: I have focus on my web browser. I want remember it under register x - I do 'mx'. When I want to run my browser next time... I just do '"x'
 ```

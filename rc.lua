@@ -108,6 +108,13 @@ function toogleFullscreen()
     c.fullscreen = not c.fullscreen
 end
 
+function toogleOnTop()
+    local c = awful.client.next(0)
+    if c == nil then return end
+
+    c.ontop = not c.ontop
+end
+
 function toogleMaximalize()
     local c = awful.client.next(0)
     if c == nil then return end
@@ -236,8 +243,8 @@ Actions["k"] = goUp
 Actions["l"] = goRight
 Actions["L"] = goNext
 Actions["r"] = runCommand
-Actions["f"] = toogleFullscreen
-Actions["m"] = toogleMaximalize
+Actions["f"] = toogleFullscreen -- DEPRECATED - will be used for application register
+Actions["m"] = toogleMaximalize -- DEPRECATED - same as 'f' action
 Actions["n"] = minimize
 Actions["N"] = restore
 Actions["Tab"] = goNext
@@ -264,6 +271,9 @@ Actions["ct"] = nextTag
 Actions["Ct"] = previousTag
 Actions["cs"] = nextScreen
 Actions["Cs"] = previousScreen
+Actions["gm"] = toogleMaximalize
+Actions["gt"] = toogleOnTop
+Actions["gf"] = toogleFullscreen
 
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
@@ -571,26 +581,21 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-
-
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    
 
-   
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end)
+    --awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    --awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        )
 )
 
 -- Bind all key numbers to tags.
