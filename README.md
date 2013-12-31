@@ -30,6 +30,7 @@ i - switch to INSERT mode
 s - switch windows
 t - run terminal
 e - run editor
+u - jump to the window that received the urgent hint
 ```
 
 

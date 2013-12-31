@@ -222,6 +222,7 @@ function nextTag() awful.tag.viewnext() end
 function previousTag() awful.tag.viewprev() end
 function nextScreen() awful.screen.focus_relative(1) end
 function previousScreen() awful.screen.focus_relative(-1) end
+function urgentJump() awful.client.urgent.jumpto() end
 
 
 -- Actions
@@ -249,6 +250,7 @@ Actions["Left"] = goLeft
 Actions["Up"] = goUp
 Actions["Down"] = goDown
 Actions[":"] = switchToCommandMode
+Actions["u"] = urgentJump
 
 -- Multi commands
 Actions["dd"] = closeWindow
@@ -293,7 +295,7 @@ local cmdCount = 0;
 local cmd = ""
 
 
-local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":", "u" }
 local function isQuickCmd(key)
     return inTable(QUICK_CMDS, key)
 end
@@ -563,13 +565,12 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
 
 
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    --awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
 
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
