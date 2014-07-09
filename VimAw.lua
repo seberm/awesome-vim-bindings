@@ -46,6 +46,7 @@ function insertMode()
     keygrabber.stop()
 end
 
+require("command_mode")
 
 require("actions")
 
@@ -113,7 +114,7 @@ end
 
 
 -- Switch to NORMAL mode
-function VimAw.normalMode()
+function normalMode()
     changeMode(NORMAL_MODE)
     redrawBorders(WIN_BORDER_ACTIVE_NORMAL_MODE)
 
@@ -125,7 +126,6 @@ function VimAw.normalMode()
 end
 
 
-require("command_mode")
 
 
 

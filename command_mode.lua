@@ -1,5 +1,9 @@
 local awful = require("awful")
 
+local dbg = require("dbg")
+local utils = require("utils")
+
+
 COMMAND_PROMPT_HISTORY_SIZE = 50
 
 -- Commands specification
@@ -42,7 +46,7 @@ function switchToCommandMode()
               cur_pos = cur_pos + 1
               return command, cur_pos
           else
-              local all_cmds = tableKeys(Commands)
+              local all_cmds = utils.tableKeys(Commands)
 
               -- Abort completion under some circumstances
               if #command == 0 or (cur_pos ~= #command + 1 and command:sub(cur_pos, cur_pos) ~= " ") then
@@ -68,7 +72,7 @@ function switchToCommandMode()
 
       -- Prompt automatically switches desktop into INSERT mode when we
       -- cancel input, so... we must explicitly switch it back into NORMAL mode
-      VimAw.normalMode -- Done callback
+      normalMode -- Done callback
   )
 end
 

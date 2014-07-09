@@ -15,7 +15,7 @@ local menubar = require("menubar")
 local VimAw = require("VimAw")
 
 -- START WITH NORMAL MODE
-VimAw.normalMode()
+normalMode()
 
 
 -- This is used later as the default terminal and editor
@@ -226,8 +226,8 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
 
     -- Shortcut for returning to NORMAL MODE
-    awful.key({ modkey,           }, "Escape", function () VimAw.normalMode() end),
-    awful.key({ "Control", "Mod1" }, "[", function () VimAw.normalMode() end),
+    awful.key({ modkey,           }, "Escape", function () normalMode() end),
+    awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
 
 
     --awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
