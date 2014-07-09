@@ -16,6 +16,8 @@ terminal = "konsole"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
+COMMAND_PROMPT_HISTORY_SIZE = 50
+
 
 ---------------------------
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -177,7 +179,7 @@ function switchToCommandMode()
     awful.prompt.run(
       { prompt = "<span>COMMAND MODE: </span>" },
       mypromptbox[mouse.screen].widget,
-      function (command)
+      function (command) -- EXE Callback
         local returnString = nil
         local normalProg, command, arg = command:match("^%s*(!?)%s*(%a+)(.*)")
 
@@ -193,16 +195,19 @@ function switchToCommandMode()
         end
 
         if type(returnString) == "string" then mypromptbox[mouse.screen].widget:set_text(returnString) end
-
-        -- Prompt automatically switches desktop into INSERT mode, so... we must
-        -- explicitly switch it back into NORMAL mode
-        normalMode()
       end,
 
       -- TODO Command completion and history
       --awful.completion.shell,
       nil,
-      awful.util.getdir("cache") .. "/history_command_mode")
+      awful.util.getdir("cache") .. "/history_command_mode",
+      COMMAND_PROMPT_HISTORY_SIZE,
+      function () -- Done callback
+          -- Prompt automatically switches desktop into INSERT mode when we
+          -- cancel input, so... we must explicitly switch it back into NORMAL mode
+          normalMode()
+      end
+  )
 end
 
 
