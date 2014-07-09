@@ -9,7 +9,9 @@ For now VimAw is only a prototype.
 Installation
 ------------
 1. Clone the repository and replace your `~/.config/awesome/rc.lua` file with `rc.lua` from the repo
-2. Restart Awesome with `Mod + Control + r`
+2. Copy `vimaw` directory into `~/.config/awesome/`
+3. Restart Awesome with `Mod + Control + r`
+4. Use VimAw! (Default mode is NORMAL mode)
 
 
 NORMAL MODE
@@ -55,15 +57,20 @@ Mod4 + Esc or Control + Mod1 + ] - switch to NORMAL mode
 
 COMMAND MODE
 ------------
-If you want to run an Awesome command just press ':' in NORMAL mode. Now you can type your command.
+If you want to run an Awesome command just press `:` in NORMAL mode. Now you can type your command. It's possible to use tab completion.
 
 Supported commands are:
 ```
 restart  - restart awesome
 quit     - quit awesome
-!<cmd>   - run a program (same as 'r' command)
+!<cmd>   - run a program (same as 'r' command) - completion for shell works too
 terminal - run terminal
 editor   - run editor
+
+#maximize - TODO
+#minimize - TODO
+#fullscreen - TODO
+#help     - TODO
 ```
 
 
@@ -82,17 +89,21 @@ $ awmtt restart
 
 WANT CONTRIBUTE?
 ----------------
-VimAw is only something like protoype and there is a lot of work. Some of the TODOs you can find at the end of this document or directly in `rc.lua` file. 
+VimAw is only something like protoype and there is a lot of work. Some of the
+TODOs you can find at the end of this document or directly in code.
 
-What is the most important thing at the moment is to create list of shortcuts and their actions. Test them and optimize the list. After it will be necessary some code beautification and clarification.
+What is the most important thing at the moment is to create list of shortcuts
+and their actions. Test them and optimize the list. After it will be necessary
+some code beautification and clarification.
 
-Favoured method of contribution is via pull requests. E-mail patches are accepted too (seberm[at]seberm[dot]com).
+Favoured method of contribution is via pull requests. E-mail patches are
+accepted too (seberm[at]seberm[dot]com).
 
 
 Author
 ------
 * Otto Sabart - Seberm
-* www.seberm.com
+* [www.seberm.com](http://www.seberm.com)
 * seberm[at]seberm[dot]com
 
 
@@ -101,7 +112,6 @@ LINKS
 * [Awesome API](http://awesome.naquadah.org/doc/api/index.html)
 * [Lua reference manual](http://www.lua.org/manual/5.1/manual.html)
 * [Awesome on ArchWiki] (https://wiki.archlinux.org/index.php/awesome)
-
 
 
 TODOS
