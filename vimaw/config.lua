@@ -15,6 +15,12 @@ config.WIN_BORDER_ACTIVE_INSERT_MODE = "#00C000"
 -- Active window in normal mode (boder color) [#ff0d11]
 config.WIN_BORDER_ACTIVE_NORMAL_MODE = "#ff0d11"
 
+-- Active window in visual mode (boder color) [#00C000]
+config.WIN_BORDER_ACTIVE_VISUAL_MODE = "#00C000"
+
+-- Active window in visual mode (boder color) [#00C000]
+config.WIN_MARKED_BORDER = "#FF8000"
+
 -- Window border size [3]
 config.WIN_BORDER_SIZE = 3
 

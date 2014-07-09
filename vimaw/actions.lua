@@ -13,6 +13,10 @@ local function switchToInsertMode()
     insertMode()
 end
 
+local function switchToVisualMode()
+    visualMode()
+end
+
 local function goLeft()
     awful.client.focus.bydirection("left")
     if client.focus then client.focus:raise() end
@@ -100,6 +104,18 @@ local function runEditor()
     switchToInsertMode()
 end
 
+local function markCurrentWindow()
+    if currentMode(VISUAL_MODE) then
+        if not awful.client.ismarked() then
+            awful.client.mark()
+        else
+            awful.client.unmark()
+        end
+
+        redrawBorders()
+    end
+end
+
 
 --  Multi actions
 local function closeWindow(direction)
@@ -134,7 +150,7 @@ local Actions = {}
 -- Simple commands
 local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab",
                      "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":",
-                     "u"
+                     "u", "v"
                    }
 
 -- TODO - These definitions move to config file in the future
@@ -146,7 +162,7 @@ Actions["l"] = goRight
 Actions["L"] = goNext
 Actions["r"] = runCommand
 Actions["f"] = toogleFullscreen -- DEPRECATED - will be used for application register
-Actions["m"] = toogleMaximalize -- DEPRECATED - same as 'f' action
+Actions["m"] = markCurrentWindow
 Actions["n"] = minimize
 Actions["N"] = restore
 Actions["Tab"] = goNext
@@ -160,6 +176,7 @@ Actions["Up"] = goUp
 Actions["Down"] = goDown
 Actions[":"] = commandMode.switchToCommandMode
 Actions["u"] = urgentJump
+Actions["v"] = switchToVisualMode
 
 -- Multi commands
 local LONG_CMDS = { "d", "g", "c", "C" }

@@ -13,16 +13,20 @@ local VimAw = {}
 VimAw.modeBox = wibox.widget.textbox()
 
 -- Modes definition
-local NORMAL_MODE = "NORMAL"
-local INSERT_MODE = "INSERT"
+NORMAL_MODE = "NORMAL"
+INSERT_MODE = "INSERT"
+VISUAL_MODE = "VISUAL"
 
 local actualMode = NORMAL_MODE
 
+function currentMode(mode)
+    return actualMode == mode
+end
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.border_width = config.WIN_BORDER_SIZE
-beautiful.border_focus = config.WIN_BORDER_ACTIVE_NORMAL_MODE
+
 
 
 local function changeMode(mode)
@@ -31,8 +35,19 @@ local function changeMode(mode)
 end
 
 
-local function redrawBorders(color)
+function redrawBorders()
     local c = awful.client.next(0)
+
+    color = config.WIN_BORDER_ACTIVE_NORMAL_MODE
+    if currentMode(INSERT_MODE) then
+        color = config.WIN_BORDER_ACTIVE_INSERT_MODE
+    elseif currentMode(VISUAL_MODE) then
+        color = config.WIN_BORDER_ACTIVE_VISUAL_MODE
+        if awful.client.ismarked(c) then
+            color = config.WIN_MARKED_BORDER
+        end
+    end
+
     beautiful.border_focus = color
     if c then client.emit_signal("focus", c) end
 end
@@ -40,8 +55,14 @@ end
 
 function insertMode()
     changeMode(INSERT_MODE)
-    redrawBorders(config.WIN_BORDER_ACTIVE_INSERT_MODE)
+    redrawBorders()
     keygrabber.stop()
+end
+
+
+function visualMode()
+    changeMode(VISUAL_MODE)
+    redrawBorders()
 end
 
 
@@ -109,7 +130,7 @@ end
 -- Switch to NORMAL mode
 function normalMode()
     changeMode(NORMAL_MODE)
-    redrawBorders(config.WIN_BORDER_ACTIVE_NORMAL_MODE)
+    redrawBorders()
 
     if not keygrabber.isrunning() then
         keygrabber.run(function(mod, key, event)
