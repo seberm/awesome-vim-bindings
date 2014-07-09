@@ -1,7 +1,9 @@
 local dbg = require("dbg")
 
+local utils = {}
+
 -- Utilities
-function isNumber(key)
+function utils.isNumber(key)
     if tonumber(key) then
         return true
     end
@@ -10,7 +12,7 @@ function isNumber(key)
 end
 
 
-function inTable(table, item)
+function utils.inTable(table, item)
     for key, value in pairs(table) do
         if value == item then return key end
     end
@@ -19,7 +21,7 @@ function inTable(table, item)
 end
 
 
-function tableKeys(tab)
+function utils.tableKeys(tab)
     local keyset = {}
     local n = 0
 
@@ -30,5 +32,6 @@ function tableKeys(tab)
 
     return keyset
 end
---------------------------
 
+
+return utils

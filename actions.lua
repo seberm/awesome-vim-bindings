@@ -1,59 +1,58 @@
 local awful = require("awful")
 
--- require utils
+local utils = require("utils")
 local dbg = require("dbg")
 
 require("config")
 
 -- Simple actions
-function switchToInsertMode()
-    changeMode(INSERT_MODE)
-    redrawBorders(WIN_BORDER_ACTIVE_INSERT_MODE)
-    keygrabber.stop()
+local function switchToInsertMode()
+    insertMode()
 end
 
-function goLeft()
+local function goLeft()
     awful.client.focus.bydirection("left")
     if client.focus then client.focus:raise() end
 end
 
-function goDown()
+local function goDown()
     awful.client.focus.bydirection("down")
     if client.focus then client.focus:raise() end
 end
 
-function goUp()
+local function goUp()
     awful.client.focus.bydirection("up")
     if client.focus then client.focus:raise() end
 end
 
-function goRight()
+local function goRight()
     awful.client.focus.bydirection("right")
     if client.focus then client.focus:raise() end
 end
 
-function runCommand()
+-- TODO-X
+local function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
     -- TODO When command input is canceled, desktop should stay in NORMAL mode
     -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...but it is necessary to inform user about new mode!
     mypromptbox[mouse.screen]:run()
 end
 
-function toogleFullscreen()
+local function toogleFullscreen()
     local c = awful.client.next(0)
     if c == nil then return end
 
     c.fullscreen = not c.fullscreen
 end
 
-function toogleOnTop()
+local function toogleOnTop()
     local c = awful.client.next(0)
     if c == nil then return end
 
     c.ontop = not c.ontop
 end
 
-function toogleMaximalize()
+local function toogleMaximalize()
     local c = awful.client.next(0)
     if c == nil then return end
 
@@ -63,46 +62,45 @@ function toogleMaximalize()
     if c.focus then c.focus:raise() end
 end
 
-function minimize()
+local function minimize()
     local c = awful.client.next(0)
     if c == nil then return end
 
     c.minimized = true
 end
 
-function restore()
+local function restore()
     awful.client.restore()
 end
 
-function goNext()
+local function goNext()
     awful.client.focus.byidx(1)
     if client.focus then client.focus:raise() end
 end
 
-function goPrevious()
+local function goPrevious()
     awful.client.focus.byidx(-1)
     if client.focus then client.focus:raise() end
 end
 
-function switchWindows()
+local function switchWindows()
     awful.client.focus.history.previous()
     if client.focus then client.focus:raise() end
 end
 
-function runTerminal()
-    dbg.msg(terminal)
+local function runTerminal()
     awful.util.spawn(terminal)
     switchToInsertMode()
 end
 
-function runEditor()
+local function runEditor()
     awful.util.spawn(editor_cmd)
     switchToInsertMode()
 end
 
 
 --  Multi actions
-function closeWindow(direction)
+local function closeWindow(direction)
     if direction then
         awful.client.focus.bydirection(direction)
     end
@@ -114,17 +112,17 @@ function closeWindow(direction)
     goNext()
 end
 
-function closeWindowDown() closeWindow("down") end
-function closeWindowUp() closeWindow("up") end
-function closeWindowLeft() closeWindow("left") end
-function closeWindowRight() closeWindow("right") end
-function nextLayout() awful.layout.inc(layouts, 1) end
-function previousLayout() awful.layout.inc(layouts, -1) end
-function nextTag() awful.tag.viewnext() end
-function previousTag() awful.tag.viewprev() end
-function nextScreen() awful.screen.focus_relative(1) end
-function previousScreen() awful.screen.focus_relative(-1) end
-function urgentJump() awful.client.urgent.jumpto() end
+local function closeWindowDown() closeWindow("down") end
+local function closeWindowUp() closeWindow("up") end
+local function closeWindowLeft() closeWindow("left") end
+local function closeWindowRight() closeWindow("right") end
+local function nextLayout() awful.layout.inc(layouts, 1) end
+local function previousLayout() awful.layout.inc(layouts, -1) end
+local function nextTag() awful.tag.viewnext() end
+local function previousTag() awful.tag.viewprev() end
+local function nextScreen() awful.screen.focus_relative(1) end
+local function previousScreen() awful.screen.focus_relative(-1) end
+local function urgentJump() awful.client.urgent.jumpto() end
 
 
 -- Actions
@@ -180,7 +178,7 @@ function callAction(action, n)
 
     for k in pairs(Actions) do
         if (k == action) then
-            for i=1, n do Actions[k]() end
+            for i = 1, n do Actions[k]() end
             return
         end
     end
@@ -188,11 +186,12 @@ function callAction(action, n)
     print("Function does not exist!")
 end
 
+
 function isQuickCmd(key)
-    return inTable(QUICK_CMDS, key)
+    return utils.inTable(QUICK_CMDS, key)
 end
 
 
 function isLongCmd(key)
-    return inTable(LONG_CMDS, key)
+    return utils.inTable(LONG_CMDS, key)
 end

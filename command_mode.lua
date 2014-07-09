@@ -1,3 +1,5 @@
+local awful = require("awful")
+
 COMMAND_PROMPT_HISTORY_SIZE = 50
 
 -- Commands specification
@@ -66,7 +68,7 @@ function switchToCommandMode()
 
       -- Prompt automatically switches desktop into INSERT mode when we
       -- cancel input, so... we must explicitly switch it back into NORMAL mode
-      normalMode -- Done callback
+      VimAw.normalMode -- Done callback
   )
 end
 

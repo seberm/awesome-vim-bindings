@@ -2,9 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
-require("utils")
-require("actions")
-
+local utils = require("utils")
 local dbg = require("dbg")
 
 local VimAw = {}
@@ -12,6 +10,16 @@ local VimAw = {}
 -- Informative textbox showing actual mode
 VimAw.modeBox = wibox.widget.textbox()
 
+-- Modes definition
+local NORMAL_MODE = "NORMAL"
+local INSERT_MODE = "INSERT"
+
+local actualMode = NORMAL_MODE
+
+local function changeMode(mode)
+    actualMode = mode
+    VimAw.modeBox:set_text("[--" .. mode .. "--]")
+end
 
 WIN_BORDER_ACTIVE_INSERT_MODE = "#00C000"
 WIN_BORDER_ACTIVE_NORMAL_MODE = "#ff0d11"
@@ -24,24 +32,23 @@ beautiful.border_width = WIN_BORDER_SIZE
 beautiful.border_focus = WIN_BORDER_ACTIVE_NORMAL_MODE
 
 
--- Modes definition
-local NORMAL_MODE = "NORMAL"
-local INSERT_MODE = "INSERT"
-
-local actualMode = NORMAL_MODE
-
-
-local function changeMode(mode)
-    actualMode = mode
-    VimAw.modeBox:set_text("[--" .. mode .. "--]")
-end
-
-
 local function redrawBorders(color)
     local c = awful.client.next(0)
     beautiful.border_focus = color
     if c then client.emit_signal("focus", c) end
 end
+
+
+-- TODO-X use VimAw prefix
+function insertMode()
+    changeMode(INSERT_MODE)
+    redrawBorders(WIN_BORDER_ACTIVE_INSERT_MODE)
+    keygrabber.stop()
+end
+
+
+require("actions")
+
 
 
 -- Constants
@@ -70,7 +77,7 @@ local function doAction(key)
     while status ~= END do
         -- READY STATUS - reading the first char
         if status == START then
-            if isNumber(key) then
+            if utils.isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
                 return
             elseif isQuickCmd(key) then
@@ -87,7 +94,7 @@ local function doAction(key)
 
         elseif status == READ_NEXT then
             -- TODO If this format of command is given: Y-cmd-X-cmd, resultant count should be cmdCount = Y+X
-            if isNumber(key) then
+            if utils.isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
                 action = READ_NEXT
                 return
