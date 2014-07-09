@@ -77,6 +77,19 @@ local function inTable(table, item)
 
     return false
 end
+
+
+local function tableKeys(tab)
+    local keyset = {}
+    local n = 0
+
+    for k in pairs(tab) do
+      n = n + 1
+      keyset[n] = k
+    end
+
+    return keyset
+end
 --------------------------
 
 
