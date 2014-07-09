@@ -11,9 +11,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
--- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-
 
 -- This is used later as the default terminal and editor
 terminal = "xterm"
@@ -21,6 +18,16 @@ editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 COMMAND_PROMPT_HISTORY_SIZE = 50
+WIN_BORDER_ACTIVE_INSERT_MODE = "#00C000"
+WIN_BORDER_ACTIVE_NORMAL_MODE = "#ff0d11"
+WIN_BORDER_SIZE = 3
+
+
+
+-- Themes define colours, icons, and wallpapers
+beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.border_width = WIN_BORDER_SIZE
+beautiful.border_focus = WIN_BORDER_ACTIVE_NORMAL_MODE
 
 
 ---------------------------
@@ -103,7 +110,7 @@ end
 function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
     -- TODO When command input is canceled, desktop should stay in NORMAL mode
-    -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...
+    -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...but it is necessary to inform user about new mode!
     mypromptbox[mouse.screen]:run()
 end
 
@@ -154,8 +161,7 @@ end
 
 function switchToInsertMode()
     changeMode(INSERT_MODE)
-    beautiful.border_focus = "#00C000" -- set green border color
-    redrawBorders()
+    redrawBorders(WIN_BORDER_ACTIVE_INSERT_MODE)
     keygrabber.stop()
 end
 
@@ -375,8 +381,9 @@ function doAction(key)
 end
 
 
-function redrawBorders()
+function redrawBorders(color)
     local c = awful.client.next(0)
+    beautiful.border_focus = color
     if c then client.emit_signal("focus", c) end
 end
 
@@ -384,8 +391,7 @@ end
 -- Switch to NORMAL mode
 function normalMode()
     changeMode(NORMAL_MODE)
-    beautiful.border_focus = "#ff0d11" -- set red border color
-    redrawBorders()
+    redrawBorders(WIN_BORDER_ACTIVE_NORMAL_MODE)
 
     if not keygrabber.isrunning() then
         keygrabber.run(function(mod, key, event)
@@ -426,12 +432,6 @@ end
 -- }}}
 
 
-
--------------------------------------
--- Highlighted active window (this will not be in future here)
-beautiful.border_width = "3"
-beautiful.border_focus = "#ff0d11"
--------------------------------------
 
 
 
