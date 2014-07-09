@@ -11,6 +11,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+-- Themes define colours, icons, and wallpapers
+beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+
+
 -- This is used later as the default terminal and editor
 terminal = "xterm"
 editor = os.getenv("EDITOR") or "vi"
@@ -150,6 +154,8 @@ end
 
 function switchToInsertMode()
     changeMode(INSERT_MODE)
+    beautiful.border_focus = "#00C000" -- set green border color
+    redrawBorders()
     keygrabber.stop()
 end
 
@@ -367,9 +373,17 @@ function doAction(key)
 end
 
 
+function redrawBorders()
+    local c = awful.client.next(0)
+    if c then client.emit_signal("focus", c) end
+end
+
+
 -- Switch to NORMAL mode
 function normalMode()
     changeMode(NORMAL_MODE)
+    beautiful.border_focus = "#ff0d11" -- set red border color
+    redrawBorders()
 
     if not keygrabber.isrunning() then
         keygrabber.run(function(mod, key, event)
@@ -409,16 +423,11 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-
 
 
 -------------------------------------
 -- Highlighted active window (this will not be in future here)
 beautiful.border_width = "3"
---red
 beautiful.border_focus = "#ff0d11"
 -------------------------------------
 
