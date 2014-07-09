@@ -2,10 +2,10 @@ local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
-local utils = require("utils")
-local config = require("config")
-local actions = require("actions")
-local dbg = require("dbg")
+local utils = require("vimaw.utils")
+local config = require("vimaw.config")
+local actions = require("vimaw.actions")
+local dbg = require("vimaw.dbg")
 
 local VimAw = {}
 

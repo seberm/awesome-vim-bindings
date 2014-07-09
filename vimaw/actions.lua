@@ -1,9 +1,9 @@
 local awful = require("awful")
 
-local utils = require("utils")
-local config = require("config")
-local dbg = require("dbg")
-local commandMode = require("command_mode")
+local utils = require("vimaw.utils")
+local config = require("vimaw.config")
+local dbg = require("vimaw.dbg")
+local commandMode = require("vimaw.command_mode")
 
 local actions = {}
 

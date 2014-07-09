@@ -12,11 +12,11 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 
-local config = require("config")
+local config = require("vimaw.config")
 
 
 -- Run VimAw
-local VimAw = require("VimAw")
+local VimAw = require("vimaw.VimAw")
 VimAw:run()
 
 
