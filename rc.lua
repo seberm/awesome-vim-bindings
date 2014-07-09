@@ -223,10 +223,38 @@ function switchToCommandMode()
 
         if type(returnString) == "string" then mypromptbox[mouse.screen].widget:set_text(returnString) end
       end,
+      function (command, cur_pos, ncomp, shell)
+          if command:sub(1,1) == "!" then
+              command = command:sub(2)
+              cur_pos = cur_pos - 1
 
-      -- TODO Command completion and history
-      --awful.completion.shell,
-      nil,
+              command, cur_pos = awful.completion.shell(command, cur_pos, ncomp, shell)
+
+              command = '!' .. command
+              cur_pos = cur_pos + 1
+              return command, cur_pos
+          else
+              local all_cmds = tableKeys(Commands)
+
+              -- Abort completion under some circumstances
+              if #command == 0 or (cur_pos ~= #command + 1 and command:sub(cur_pos, cur_pos) ~= " ") then
+                  return command, cur_pos
+              end
+
+              local matches = {}
+              for k, c in pairs(all_cmds) do
+                if c:find("^" .. command:sub(1, cur_pos)) then
+                    table.insert(matches, c)
+                end
+              end
+
+              -- There are no matches, abort completion
+              if #matches == 0 then return command, cur_pos end
+
+              while ncomp > #matches do ncomp = ncomp - #matches end
+              return matches[ncomp], cur_pos
+          end
+      end,
       awful.util.getdir("cache") .. "/history_command_mode",
       COMMAND_PROMPT_HISTORY_SIZE,
 
