@@ -1,8 +1,8 @@
 local dbg = require("dbg")
 
+-- Utilities
 local utils = {}
 
--- Utilities
 function utils.isNumber(key)
     if tonumber(key) then
         return true

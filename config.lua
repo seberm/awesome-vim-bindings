@@ -18,6 +18,8 @@ config.WIN_BORDER_ACTIVE_NORMAL_MODE = "#ff0d11"
 -- Window border size [3]
 config.WIN_BORDER_SIZE = 3
 
+-- Command history size
+config.COMMAND_PROMPT_HISTORY_SIZE = 50
 
 
 return config

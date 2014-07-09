@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 
 local utils = require("utils")
 local config = require("config")
+local actions = require("actions")
 local dbg = require("dbg")
 
 local VimAw = {}
@@ -17,16 +18,17 @@ local INSERT_MODE = "INSERT"
 
 local actualMode = NORMAL_MODE
 
-local function changeMode(mode)
-    actualMode = mode
-    VimAw.modeBox:set_text("[--" .. mode .. "--]")
-end
-
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.border_width = config.WIN_BORDER_SIZE
 beautiful.border_focus = config.WIN_BORDER_ACTIVE_NORMAL_MODE
+
+
+local function changeMode(mode)
+    actualMode = mode
+    VimAw.modeBox:set_text(string.format("[--%s--]", mode))
+end
 
 
 local function redrawBorders(color)
@@ -41,10 +43,6 @@ function insertMode()
     redrawBorders(config.WIN_BORDER_ACTIVE_INSERT_MODE)
     keygrabber.stop()
 end
-
-
-require("command_mode")
-local actions = require("actions")
 
 
 -- States

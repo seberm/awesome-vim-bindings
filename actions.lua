@@ -3,6 +3,7 @@ local awful = require("awful")
 local utils = require("utils")
 local config = require("config")
 local dbg = require("dbg")
+local commandMode = require("command_mode")
 
 local actions = {}
 
@@ -113,6 +114,7 @@ local function closeWindow(direction)
     goNext()
 end
 
+
 local function closeWindowDown()    closeWindow("down")             end
 local function closeWindowUp()      closeWindow("up")               end
 local function closeWindowLeft()    closeWindow("left")             end
@@ -156,7 +158,7 @@ Actions["Right"] = goRight
 Actions["Left"] = goLeft
 Actions["Up"] = goUp
 Actions["Down"] = goDown
-Actions[":"] = switchToCommandMode
+Actions[":"] = commandMode.switchToCommandMode
 Actions["u"] = urgentJump
 
 -- Multi commands
@@ -201,7 +203,6 @@ end
 function actions.isLongCmd(key)
     return utils.inTable(LONG_CMDS, key)
 end
-
 
 
 return actions

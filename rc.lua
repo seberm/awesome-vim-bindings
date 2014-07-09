@@ -13,10 +13,10 @@ local menubar = require("menubar")
 
 
 local config = require("config")
-local VimAw = require("VimAw")
 
 
 -- Run VimAw
+local VimAw = require("VimAw")
 VimAw:run()
 
 
@@ -172,7 +172,10 @@ mytasklist.buttons = awful.util.table.join(
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
+    -- ----------------------------------------------------
     mypromptbox[s] = awful.widget.prompt()
+    -- ----------------------------------------------------
+
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
@@ -194,13 +197,18 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
+
+    ----------------------------------------------------------------
     left_layout:add(mypromptbox[s])
+    ----------------------------------------------------------------
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
+    ----------------------------------------------------------------
     right_layout:add(VimAw.modeBox)
+    ----------------------------------------------------------------
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -224,26 +232,28 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
 
+    -------------------------------------------------- !!!!!!!!!!!!!!!!!!!!
     -- Shortcut for returning to NORMAL MODE
     awful.key({ modkey,           }, "Escape", function () normalMode() end),
-    awful.key({ "Control", "Mod1" }, "[", function () normalMode() end),
+    awful.key({ "Control", "Mod1" }, "[", function () normalMode() end)
+    -------------------------------------------------- !!!!!!!!!!!!!!!!!!!!
 
 
     --awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
+    --awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
+    --awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    --awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    --awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    --awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
+    --awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
+    --awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
+    --awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
 
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    ---- Menubar
+    --awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -393,6 +403,8 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 
+-- ----------------------------------------------------
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+-- ----------------------------------------------------
+
