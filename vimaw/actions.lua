@@ -135,8 +135,8 @@ local function closeWindowDown()    closeWindow("down")             end
 local function closeWindowUp()      closeWindow("up")               end
 local function closeWindowLeft()    closeWindow("left")             end
 local function closeWindowRight()   closeWindow("right")            end
-local function nextLayout()         awful.layout.inc(layouts, 1)    end
-local function previousLayout()     awful.layout.inc(layouts, -1)   end
+local function nextLayout()         awful.layout.inc(config.layouts, 1)    end
+local function previousLayout()     awful.layout.inc(config.layouts, -1)   end
 local function nextTag()            awful.tag.viewnext()            end
 local function previousTag()        awful.tag.viewprev()            end
 local function nextScreen()         awful.screen.focus_relative(1)  end

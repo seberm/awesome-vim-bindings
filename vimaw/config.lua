@@ -1,3 +1,5 @@
+local awful = require("awful")
+
 local config = {}
 
 -- Default terminal [xterm]
@@ -27,5 +29,21 @@ config.WIN_BORDER_SIZE = 3
 -- Command history size
 config.COMMAND_PROMPT_HISTORY_SIZE = 50
 
+-- Table of layouts to cover with awful.layout.inc, order matters.
+config.layouts =
+{
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier
+}
 
 return config
