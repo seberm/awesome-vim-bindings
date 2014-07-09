@@ -371,9 +371,11 @@ end
 function normalMode()
     changeMode(NORMAL_MODE)
 
-    keygrabber.run(function(mod, key, event)
-        if event == "press" then doAction(key) end
-    end)
+    if not keygrabber.isrunning() then
+        keygrabber.run(function(mod, key, event)
+            if event == "press" then doAction(key) end
+        end)
+    end
 end
 
 
