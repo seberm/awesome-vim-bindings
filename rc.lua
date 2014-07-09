@@ -11,8 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
--- This is used later as the default terminal and editor to run.
-terminal = "konsole"
+-- This is used later as the default terminal and editor
+terminal = "xterm"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
