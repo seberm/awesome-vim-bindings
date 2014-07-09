@@ -202,11 +202,10 @@ function switchToCommandMode()
       nil,
       awful.util.getdir("cache") .. "/history_command_mode",
       COMMAND_PROMPT_HISTORY_SIZE,
-      function () -- Done callback
-          -- Prompt automatically switches desktop into INSERT mode when we
-          -- cancel input, so... we must explicitly switch it back into NORMAL mode
-          normalMode()
-      end
+
+      -- Prompt automatically switches desktop into INSERT mode when we
+      -- cancel input, so... we must explicitly switch it back into NORMAL mode
+      normalMode -- Done callback
   )
 end
 
