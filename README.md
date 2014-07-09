@@ -59,9 +59,11 @@ If you want to run an Awesome command just press ':' in NORMAL mode. Now you can
 
 Supported commands are:
 ```
-restart - restart awesome
-quit    - quit awesome
-!<cmd>  - run a program (same as 'r' command)
+restart  - restart awesome
+quit     - quit awesome
+!<cmd>   - run a program (same as 'r' command)
+terminal - run terminal
+editor   - run editor
 ```
 
 

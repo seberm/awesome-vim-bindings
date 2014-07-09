@@ -179,6 +179,8 @@ end
 local Commands = { }
 Commands["restart"] = awesome.restart
 Commands["quit"] = awesome.quit
+Commands["terminal"] = runTerminal
+Commands["editor"] = runEditor
 
 
 function switchToCommandMode()
