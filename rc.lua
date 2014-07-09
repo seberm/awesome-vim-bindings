@@ -12,14 +12,13 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 
+local config = require("config")
 local VimAw = require("VimAw")
 
--- START WITH NORMAL MODE
-normalMode()
 
+-- Run VimAw
+VimAw:run()
 
--- This is used later as the default terminal and editor
-local config = require("config")
 
 
 ---------------------------

@@ -4,6 +4,8 @@ local utils = require("utils")
 local config = require("config")
 local dbg = require("dbg")
 
+local actions = {}
+
 
 -- Simple actions
 local function switchToInsertMode()
@@ -30,7 +32,6 @@ local function goRight()
     if client.focus then client.focus:raise() end
 end
 
--- TODO-X
 local function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
     -- TODO When command input is canceled, desktop should stay in NORMAL mode
@@ -112,24 +113,27 @@ local function closeWindow(direction)
     goNext()
 end
 
-local function closeWindowDown() closeWindow("down") end
-local function closeWindowUp() closeWindow("up") end
-local function closeWindowLeft() closeWindow("left") end
-local function closeWindowRight() closeWindow("right") end
-local function nextLayout() awful.layout.inc(layouts, 1) end
-local function previousLayout() awful.layout.inc(layouts, -1) end
-local function nextTag() awful.tag.viewnext() end
-local function previousTag() awful.tag.viewprev() end
-local function nextScreen() awful.screen.focus_relative(1) end
-local function previousScreen() awful.screen.focus_relative(-1) end
-local function urgentJump() awful.client.urgent.jumpto() end
+local function closeWindowDown()    closeWindow("down")             end
+local function closeWindowUp()      closeWindow("up")               end
+local function closeWindowLeft()    closeWindow("left")             end
+local function closeWindowRight()   closeWindow("right")            end
+local function nextLayout()         awful.layout.inc(layouts, 1)    end
+local function previousLayout()     awful.layout.inc(layouts, -1)   end
+local function nextTag()            awful.tag.viewnext()            end
+local function previousTag()        awful.tag.viewprev()            end
+local function nextScreen()         awful.screen.focus_relative(1)  end
+local function previousScreen()     awful.screen.focus_relative(-1) end
+local function urgentJump()         awful.client.urgent.jumpto()    end
 
 
 -- Actions
 local Actions = {}
 
 -- Simple commands
-local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":", "u" }
+local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab",
+                     "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":",
+                     "u"
+                   }
 
 -- TODO - These definitions move to config file in the future
 Actions["h"] = goLeft
@@ -174,7 +178,7 @@ Actions["gf"] = toogleFullscreen
 
 
 -- TODO write a function to call these functions in array - warn if key of an array does not exist
-function callAction(action, n)
+function actions.callAction(action, n)
     -- Function never will be called 0 times
     if n == nil or n == 0 then n = 1 end
 
@@ -189,11 +193,15 @@ function callAction(action, n)
 end
 
 
-function isQuickCmd(key)
+function actions.isQuickCmd(key)
     return utils.inTable(QUICK_CMDS, key)
 end
 
 
-function isLongCmd(key)
+function actions.isLongCmd(key)
     return utils.inTable(LONG_CMDS, key)
 end
+
+
+
+return actions

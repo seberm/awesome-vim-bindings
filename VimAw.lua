@@ -44,11 +44,10 @@ end
 
 
 require("command_mode")
-require("actions")
+local actions = require("actions")
 
 
-
--- Constants
+-- States
 local END = 0
 local START = 1
 local READ_NEXT = 2
@@ -77,10 +76,10 @@ local function doAction(key)
             if utils.isNumber(key) then
                 cmdCount = cmdCount * 10 + tonumber(key)
                 return
-            elseif isQuickCmd(key) then
+            elseif actions.isQuickCmd(key) then
                 cmd = key
                 status = COMPLETE
-            elseif isLongCmd(key) then
+            elseif actions.isLongCmd(key) then
                 cmd = key
                 status = READ_NEXT
                 return
@@ -101,7 +100,7 @@ local function doAction(key)
             end
 
         elseif status == COMPLETE then
-            callAction(cmd, cmdCount)
+            actions.callAction(cmd, cmdCount)
             reset()
             break; -- or return
         end
@@ -122,4 +121,5 @@ function normalMode()
 end
 
 
+VimAw.run = normalMode
 return VimAw
