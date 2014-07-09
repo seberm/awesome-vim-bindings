@@ -3,6 +3,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 local utils = require("utils")
+local config = require("config")
 local dbg = require("dbg")
 
 local VimAw = {}
@@ -21,15 +22,11 @@ local function changeMode(mode)
     VimAw.modeBox:set_text("[--" .. mode .. "--]")
 end
 
-WIN_BORDER_ACTIVE_INSERT_MODE = "#00C000"
-WIN_BORDER_ACTIVE_NORMAL_MODE = "#ff0d11"
-WIN_BORDER_SIZE = 3
-
 
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-beautiful.border_width = WIN_BORDER_SIZE
-beautiful.border_focus = WIN_BORDER_ACTIVE_NORMAL_MODE
+beautiful.border_width = config.WIN_BORDER_SIZE
+beautiful.border_focus = config.WIN_BORDER_ACTIVE_NORMAL_MODE
 
 
 local function redrawBorders(color)
@@ -39,15 +36,14 @@ local function redrawBorders(color)
 end
 
 
--- TODO-X use VimAw prefix
 function insertMode()
     changeMode(INSERT_MODE)
-    redrawBorders(WIN_BORDER_ACTIVE_INSERT_MODE)
+    redrawBorders(config.WIN_BORDER_ACTIVE_INSERT_MODE)
     keygrabber.stop()
 end
 
-require("command_mode")
 
+require("command_mode")
 require("actions")
 
 
@@ -116,7 +112,7 @@ end
 -- Switch to NORMAL mode
 function normalMode()
     changeMode(NORMAL_MODE)
-    redrawBorders(WIN_BORDER_ACTIVE_NORMAL_MODE)
+    redrawBorders(config.WIN_BORDER_ACTIVE_NORMAL_MODE)
 
     if not keygrabber.isrunning() then
         keygrabber.run(function(mod, key, event)
@@ -124,9 +120,6 @@ function normalMode()
         end)
     end
 end
-
-
-
 
 
 return VimAw

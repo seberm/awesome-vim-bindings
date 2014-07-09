@@ -1,9 +1,9 @@
 local awful = require("awful")
 
 local utils = require("utils")
+local config = require("config")
 local dbg = require("dbg")
 
-require("config")
 
 -- Simple actions
 local function switchToInsertMode()
@@ -89,12 +89,12 @@ local function switchWindows()
 end
 
 local function runTerminal()
-    awful.util.spawn(terminal)
+    awful.util.spawn(config.TERMINAL)
     switchToInsertMode()
 end
 
 local function runEditor()
-    awful.util.spawn(editor_cmd)
+    awful.util.spawn(config.EDITOR_CMD)
     switchToInsertMode()
 end
 
@@ -130,6 +130,8 @@ local Actions = {}
 
 -- Simple commands
 local QUICK_CMDS = { "h", "H", "j", "k", "l", "L", "r", "f", "m", "n", "Tab", "i", "s", "t", "e", "Left", "Right", "Down", "Up", ":", "u" }
+
+-- TODO - These definitions move to config file in the future
 Actions["h"] = goLeft
 Actions["H"] = goPrevious
 Actions["j"] = goDown
@@ -183,7 +185,7 @@ function callAction(action, n)
         end
     end
 
-    print("Function does not exist!")
+    dbg.msg("Function does not exist!")
 end
 
 

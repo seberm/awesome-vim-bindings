@@ -19,7 +19,7 @@ normalMode()
 
 
 -- This is used later as the default terminal and editor
-require("config")
+local config = require("config")
 
 
 ---------------------------
@@ -101,14 +101,14 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "manual", config.TERMINAL .. " -e man awesome" },
+   { "edit config", config.EDITOR_CMD .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", config.TERMINAL }
                                   }
                         })
 
@@ -116,7 +116,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.terminal = config.TERMINAL -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibox
