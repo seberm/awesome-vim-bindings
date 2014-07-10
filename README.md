@@ -33,6 +33,7 @@ s - switch windows
 t - run terminal
 e - run editor
 u - jump to the window that received the urgent hint
+v - switch to VISUAL mode
 ```
 
 
@@ -73,8 +74,17 @@ editor   - run editor
 #help     - TODO
 ```
 
+VISUAL MODE
+------------
+Still in development!!!
 
-TESTING
+You can switch to VISUAL mode with `v` from NORMAL mode.
+```
+m - mark/unmark window
+```
+
+
+Testing
 -------
 * [Debugging rc.lua on ArchWiki](https://wiki.archlinux.org/index.php/awesome#Debugging_rc.lua)
 
@@ -87,7 +97,7 @@ $ awmtt restart
 ```
 
 
-WANT CONTRIBUTE?
+Want contribute?
 ----------------
 VimAw is only something like protoype and there is a lot of work. Some of the
 TODOs you can find at the end of this document or directly in code.
@@ -107,14 +117,14 @@ Author
 * seberm[at]seberm[dot]com
 
 
-LINKS
+Links
 -----
 * [Awesome API](http://awesome.naquadah.org/doc/api/index.html)
 * [Lua reference manual](http://www.lua.org/manual/5.1/manual.html)
 * [Awesome on ArchWiki] (https://wiki.archlinux.org/index.php/awesome)
 
 
-TODOS
+TODOs
 -----
 ```
 - Support VISUAL mode
