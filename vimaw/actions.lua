@@ -2,7 +2,7 @@ local awful = require("awful")
 
 local utils = require("vimaw.utils")
 local config = require("vimaw.config")
-local dbg = require("vimaw.dbg")
+local log = require("vimaw.logging")
 local commandMode = require("vimaw.command_mode")
 
 local actions = {}
@@ -221,7 +221,7 @@ function actions.callAction(action, n)
         end
     end
 
-    dbg.dbg("Function does not exist!")
+    log.debug("Function does not exist!")
 end
 
 

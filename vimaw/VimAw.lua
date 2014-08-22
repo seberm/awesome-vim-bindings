@@ -5,7 +5,7 @@ local beautiful = require("beautiful")
 local utils = require("vimaw.utils")
 local config = require("vimaw.config")
 local actions = require("vimaw.actions")
-local dbg = require("vimaw.dbg")
+local log = require("vimaw.logging")
 
 local VimAw = {}
 

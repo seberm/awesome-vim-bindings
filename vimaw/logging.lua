@@ -3,7 +3,7 @@ local naughty = require("naughty")
 local config = require("vimaw.config")
 
 
-local dbg = {}
+local logging = {}
 
 local function showMessage(title, msg)
     naughty.notify({ preset = naughty.config.presets.critical,
@@ -13,15 +13,15 @@ local function showMessage(title, msg)
 end
 
 
-function dbg.dbg(msg)
+function logging.debug(msg)
     if config.LOGGING_MODE == "debug" then
         showMessage("VimAw Debug message", msg)
     end
 end
 
 
-function dbg.info(msg)
+function logging.info(msg)
     showMessage("VimAw info message", msg)
 end
 
-return dbg
+return logging

@@ -1,4 +1,4 @@
-local dbg = require("vimaw.dbg")
+local log = require("vimaw.logging")
 
 -- Utilities
 local utils = {}

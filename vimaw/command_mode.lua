@@ -1,6 +1,6 @@
 local awful = require("awful")
 
-local dbg = require("vimaw.dbg")
+local log = require("vimaw.logging")
 local config = require("vimaw.config")
 local utils = require("vimaw.utils")
 
