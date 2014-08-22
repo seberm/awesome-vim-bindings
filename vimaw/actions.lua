@@ -37,12 +37,25 @@ local function goRight()
     if client.focus then client.focus:raise() end
 end
 
+
 local function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
-    -- TODO When command input is canceled, desktop should stay in NORMAL mode
-    -- TODO Application is automaticaly switched into INSERT MODE - maybe it is OK...but it is necessary to inform user about new mode!
-    mypromptbox[mouse.screen]:run()
+
+    awful.prompt.run(
+      { prompt = "<span>Run: </span>" },
+      mypromptbox[mouse.screen].widget,
+      awful.util.spawn,
+      awful.completion.shell,
+      awful.util.getdir("cache") .. "/history",
+      config.RUN_PROMPT_HISTORY_SIZE,
+
+      -- Prompt automatically switches desktop into INSERT mode when we
+      -- cancel input, so... we must explicitly switch it back into NORMAL mode
+      -- It the same like in command mode.
+      normalMode -- Done callback
+   )
 end
+
 
 local function toogleFullscreen()
     local c = awful.client.next(0)

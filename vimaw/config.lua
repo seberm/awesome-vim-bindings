@@ -29,6 +29,9 @@ config.WIN_BORDER_SIZE = 3
 -- Command prompt history size [50]
 config.COMMAND_PROMPT_HISTORY_SIZE = 50
 
+-- Run prompt history size [50]
+config.RUN_PROMPT_HISTORY_SIZE = 50
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 config.layouts =
 {
