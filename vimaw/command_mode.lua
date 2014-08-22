@@ -30,7 +30,9 @@ local function exe_callback(command)
         end
     end
 
-    if type(returnString) == "string" then mypromptbox[mouse.screen].widget:set_text(returnString) end
+    if type(returnString) == "string" then
+        mypromptbox[mouse.screen].widget:set_text(returnString)
+    end
 end
 
 

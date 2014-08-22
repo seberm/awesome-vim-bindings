@@ -26,7 +26,7 @@ config.WIN_MARKED_BORDER = "#FF8000"
 -- Window border size [3]
 config.WIN_BORDER_SIZE = 3
 
--- Command history size
+-- Command prompt history size [50]
 config.COMMAND_PROMPT_HISTORY_SIZE = 50
 
 -- Table of layouts to cover with awful.layout.inc, order matters.

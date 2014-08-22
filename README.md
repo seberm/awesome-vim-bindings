@@ -2,9 +2,8 @@ VimAw - Awesome Vim-bindings
 ============================
 Control your Awesome desktop with Vim shortcuts!
 
-Have you ever thought about controlling whole window manager with Vim-like shortcuts? Now it's possible.
+Have you ever thought about controlling whole window manager via Vim-like shortcuts? Now it's possible.
 
-For now VimAw is only a prototype.
 
 Installation
 ------------
@@ -132,6 +131,5 @@ TODOs
 - 'u' - open last closed window/application
 - Control + w - manage current window
         - control + w - switch between two windows
-- Window maximize with 'gUU' or with 'gm'?
 - Use 'm' for maximize or for remembering some client? - example: I have focus on my web browser. I want remember it under register x - I do 'mx'. When I want to run my browser next time... I just do '"x'
 ```
