@@ -89,7 +89,8 @@ local function minimize()
 end
 
 local function restore()
-    awful.client.restore()
+    -- TODO: Still not working :/
+    awful.client.restore(mouse.screen)
 end
 
 local function goNext()
