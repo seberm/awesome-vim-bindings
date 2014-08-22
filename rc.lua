@@ -3,17 +3,20 @@ local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
+
 -- Widget and layout library
 local wibox = require("wibox")
+
 -- Theme handling library
 local beautiful = require("beautiful")
+
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 
 
+-- VimAw configuration file
 local config = require("vimaw.config")
-
 
 
 -- Run VimAw
@@ -220,26 +223,15 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", "Mod1" }, "[", function () normalMode() end)
     -------------------------------------------------- !!!!!!!!!!!!!!!!!!!!
 
-
-    --awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
-
-    -- Layout manipulation
-    --awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    --awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-
     --awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     --awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     --awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     --awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     --awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     --awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-
-    ---- Menubar
-    --awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
-    --awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     --awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        )
 )
@@ -303,12 +295,10 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    --{ rule = { class = "MPlayer" },
+    --  properties = { floating = true } },
+    --{ rule = { class = "pinentry" },
+    --  properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -385,6 +375,7 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 
+-- Focused window has colored border
 -- ----------------------------------------------------
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
