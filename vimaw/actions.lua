@@ -221,7 +221,7 @@ function actions.callAction(action, n)
         end
     end
 
-    dbg.msg("Function does not exist!")
+    dbg.dbg("Function does not exist!")
 end
 
 

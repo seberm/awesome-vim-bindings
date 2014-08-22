@@ -32,6 +32,9 @@ config.COMMAND_PROMPT_HISTORY_SIZE = 50
 -- Run prompt history size [50]
 config.RUN_PROMPT_HISTORY_SIZE = 50
 
+
+-- Logging mode [debug | info]
+config.LOGGING_MODE = "debug"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 config.layouts =
 {
