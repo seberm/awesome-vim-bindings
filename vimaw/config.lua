@@ -3,7 +3,7 @@ local awful = require("awful")
 local config = {}
 
 -- Default terminal [xterm]
-config.TERMINAL = "xterm"
+config.TERMINAL = "konsole"
 
 -- Default editor [vi]
 config.EDITOR = os.getenv("EDITOR") or "vi"
