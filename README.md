@@ -26,7 +26,7 @@ L - go to next widnow (same as Tab)
 r - run a program
 f - change to fullscreen - DEPRECATED
 m - maximize window - DEPRECATED - will be used for saving client into register (see TODOS)
-n - minimize window (TODO - restoring window)
+n - minimize window
 N - restore minimized window
 i - switch to INSERT mode
 s - switch windows

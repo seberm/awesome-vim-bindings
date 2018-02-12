@@ -1,4 +1,5 @@
 local awful = require("awful")
+local naughty = require("naughty")
 
 local utils = require("vimaw.utils")
 local config = require("vimaw.config")
@@ -40,20 +41,28 @@ end
 
 local function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
+    naughty.notify({ title = "zkouska!", text = "text", timeout = 0 })
 
-    awful.prompt.run(
-      { prompt = "<span>Run: </span>" },
-      mypromptbox[mouse.screen].widget,
-      awful.util.spawn,
-      awful.completion.shell,
-      awful.util.getdir("cache") .. "/history",
-      config.RUN_PROMPT_HISTORY_SIZE,
-
-      -- Prompt automatically switches desktop into INSERT mode when we
-      -- cancel input, so... we must explicitly switch it back into NORMAL mode
-      -- It the same like in command mode.
-      normalMode -- Done callback
-   )
+--    awful.prompt.run(
+--      { prompt = "<span>Run: </span>" },
+--
+-- prompt       = "Run Lua code: ",
+-- textbox      = awful.screen.focused().mypromptbox.widget,
+-- exe_callback = awful.util.eval,
+-- history_path = awful.util.get_cache_dir() .. "/history_eval"
+--
+--
+--      mypromptbox[mouse.screen].widget,
+--      awful.util.spawn,
+--      awful.completion.shell,
+--      awful.util.getdir("cache") .. "/history",
+--      config.RUN_PROMPT_HISTORY_SIZE,
+--
+--      -- Prompt automatically switches desktop into INSERT mode when we
+--      -- cancel input, so... we must explicitly switch it back into NORMAL mode
+--      -- It the same like in command mode.
+--      normalMode -- Done callback
+--   )
 end
 
 

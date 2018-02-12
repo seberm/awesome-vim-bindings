@@ -3,10 +3,10 @@ local awful = require("awful")
 local config = {}
 
 -- Default terminal [xterm]
-config.TERMINAL = "xterm"
+config.TERMINAL = "konsole"
 
 -- Default editor [vi]
-config.EDITOR = os.getenv("EDITOR") or "vi"
+config.EDITOR = os.getenv("EDITOR") or "vim"
 
 
 config.EDITOR_CMD = config.TERMINAL .. " -e " .. config.EDITOR
