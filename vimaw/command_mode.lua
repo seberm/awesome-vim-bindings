@@ -24,7 +24,7 @@ local function exe_callback(command)
     else -- It's an awesome command
         local cmd = Commands[command];
         if cmd then
-            cmd(arg)
+            if arg~="" then cmd(arg) else cmd() end
         else
             returnString = "VimAw does not support command \"" .. command .. "\""
         end
