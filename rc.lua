@@ -88,7 +88,7 @@ myawesomemenu = {
    { "manual", config.TERMINAL .. " -e man awesome" },
    { "edit config", config.EDITOR_CMD .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "quit", function() awesome.quit() end }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -158,7 +158,7 @@ mytasklist.buttons = awful.util.table.join(
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     -- ----------------------------------------------------
-    mypromptbox[s] = awful.widget.prompt()
+    mypromptbox[screen[s]] = awful.widget.prompt()
     -- ----------------------------------------------------
 
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
@@ -184,7 +184,7 @@ for s = 1, screen.count() do
     left_layout:add(mytaglist[s])
 
     ----------------------------------------------------------------
-    left_layout:add(mypromptbox[s])
+    left_layout:add(mypromptbox[screen[s]])
     ----------------------------------------------------------------
 
     -- Widgets that are aligned to the right

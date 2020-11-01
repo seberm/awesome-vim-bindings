@@ -42,17 +42,18 @@ local function runCommand()
     -- TODO Multiple run does not work (for example: 4r)
 
     awful.prompt.run(
-      { prompt = "<span>Run: </span>" },
-      mypromptbox[mouse.screen].widget,
-      awful.util.spawn,
-      awful.completion.shell,
-      awful.util.getdir("cache") .. "/history",
-      config.RUN_PROMPT_HISTORY_SIZE,
+      { prompt = "<span>Run: </span>" ,
+      textbox = mypromptbox[mouse.screen].widget,
+      exe_callback = awful.util.spawn,
+      completion_callback = awful.completion.shell,
+      history_path = awful.util.getdir("cache") .. "/history",
+      history_max = config.RUN_PROMPT_HISTORY_SIZE,
 
       -- Prompt automatically switches desktop into INSERT mode when we
       -- cancel input, so... we must explicitly switch it back into NORMAL mode
       -- It the same like in command mode.
-      normalMode -- Done callback
+      done_callback = normalMode -- Done callback
+      }
    )
 end
 
