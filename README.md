@@ -133,4 +133,5 @@ TODOs
 - [ ] 'u' - open last closed window/application
 - [ ] Control + w - manage current window
 - [ ] Use 'm' for maximize or for remembering some client? - example: I have focus on my web browser. I want remember it under register x - I do 'mx'. When I want to run my browser next time... I just do '"x'
+- [ ] (Normal mode) Fix problems when running a multi-word command using the "!<cmd>", e.g. "!gnome-terminal" does not work -> error: Failed to execute child process "gnome".
 ```
