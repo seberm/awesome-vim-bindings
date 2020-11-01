@@ -2,7 +2,8 @@ VimAw - Awesome Vim-bindings
 ============================
 Control your Awesome desktop with Vim shortcuts!
 
-Have you ever thought about controlling whole window manager via Vim-like shortcuts? Now it's possible.
+Have you ever thought about controlling whole window manager via Vim-like
+shortcuts? Now it's possible.
 
 
 Installation
@@ -97,7 +98,7 @@ $ awmtt restart
 ```
 
 
-Want contribute?
+Want to contribute?
 ----------------
 VimAw is only something like protoype and there is a lot of work. Some of the
 TODOs you can find at the end of this document or directly in code.
@@ -121,16 +122,15 @@ Links
 -----
 * [Awesome API](http://awesome.naquadah.org/doc/api/index.html)
 * [Lua reference manual](http://www.lua.org/manual/5.1/manual.html)
-* [Awesome on ArchWiki] (https://wiki.archlinux.org/index.php/awesome)
+* [Awesome on ArchWiki](https://wiki.archlinux.org/index.php/awesome)
 
 
 TODOs
 -----
-```
-- Support VISUAL mode
-- Which shortcut is the best for returning from insert mode? (MOD4 + ESC | CTRL + MOD1 + [)
-- 'u' - open last closed window/application
-- Control + w - manage current window
-        - control + w - switch between two windows
-- Use 'm' for maximize or for remembering some client? - example: I have focus on my web browser. I want remember it under register x - I do 'mx'. When I want to run my browser next time... I just do '"x'
+
+- [ ] Support VISUAL mode
+- [ ] Which shortcut is the best for returning from insert mode? (MOD4 + ESC | CTRL + MOD1 + [)
+- [ ] 'u' - open last closed window/application
+- [ ] Control + w - manage current window
+- [ ] Use 'm' for maximize or for remembering some client? - example: I have focus on my web browser. I want remember it under register x - I do 'mx'. When I want to run my browser next time... I just do '"x'
 ```
